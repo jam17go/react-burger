@@ -1,0 +1,9 @@
+.logoContainer {
+    position: absolute; /* Take the logo out of the normal flow */
+    left: 50%;
+    transform: translateX(-50%); /* Center the logo exactly */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  

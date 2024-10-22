@@ -1,0 +1,9 @@
+.navItem {
+    display: flex;
+    align-items: center;
+}
+
+.navText {
+    color: #f2f2f3;
+    font-size: 16px;
+}

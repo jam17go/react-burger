@@ -1,0 +1,13 @@
+.header {
+    background-color: #1C1C21;
+    box-sizing: border-box; /* Include padding in the width calculation */
+}
+  
+.navContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px; /* Constrain the width of the content */
+    margin: 0 auto; /* Center the container horizontally */
+    position: relative;
+}
