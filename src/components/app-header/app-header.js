@@ -10,8 +10,8 @@ const AppHeader = () => {
       <nav className={`${styles.navContainer} pt-4 pb-4`}>
         {/* Left Section: Navigation Buttons */}
         <NavSection>
-          <NavItem icon={<BurgerIcon type="primary" />} text="Конструктор" />
-          <NavItem icon={<ListIcon type="primary" />} text="Лента заказов" />
+          <NavItem icon={<BurgerIcon />} text="Конструктор" />
+          <NavItem icon={<ListIcon />} text="Лента заказов" />
         </NavSection>
 
         {/* Center Section: Logo */}
@@ -19,7 +19,7 @@ const AppHeader = () => {
 
         {/* Right Section: Profile Button */}
         <NavSection>
-          <NavItem icon={<ProfileIcon type="primary" />} text="Личный кабинет" />
+          <NavItem icon={<ProfileIcon />} text="Личный кабинет" />
         </NavSection>
       </nav>
     </header>

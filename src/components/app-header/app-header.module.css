@@ -7,7 +7,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 1200px; /* Constrain the width of the content */
+    max-width: 1240px; /* Constrain the width of the content */
     margin: 0 auto; /* Center the container horizontally */
     position: relative;
 }
