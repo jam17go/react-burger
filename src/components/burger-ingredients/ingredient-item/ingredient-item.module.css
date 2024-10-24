@@ -1,0 +1,20 @@
+.ingredientItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  border-radius: 8px;
+  text-align: center;
+  position: relative;
+}
+
+.price {
+  composes: text text_type_digits-default mt-1 mb-1 from global;
+  align-content: center;
+  display: flex;
+}
+
+.itemName {
+  composes:  mt-1 text_type_main-default from global;
+}

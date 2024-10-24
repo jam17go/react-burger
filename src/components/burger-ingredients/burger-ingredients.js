@@ -1,17 +1,9 @@
-import React from 'react';
 import styles from './burger-ingredients.module.css';
 import { ingredientsData } from '../../utils/data.js';
-import {
-    Counter, 
-    Tab,
-    CurrencyIcon
-   } from '@ya.praktikum/react-developer-burger-ui-components';
-import IngredientItem from '../ingredient-item/ingredient-item.js';
-import IngredientItemGroup from '../ingredient-item-group/ingredient-item-group';
+import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
+import IngredientItemGroup from './ingredient-item-group/ingredient-item-group';
 
-const BurgerIngredients = ({ onAdd }) => {
-    console.log(ingredientsData);
-
+const BurgerIngredients = () => {
   const buns = ingredientsData.filter(ingredient => ingredient.type === 'bun');
   const sauces = ingredientsData.filter(ingredient => ingredient.type === 'sauce');
   const mains = ingredientsData.filter(ingredient => ingredient.type === 'main');
@@ -33,24 +25,24 @@ const BurgerIngredients = ({ onAdd }) => {
 
   return (
       <section className={styles.section}>
-        <h1 className="pt-10 pb-5 text text_type_main-large">
+        <h1 className={styles.header}>
             Соберите бургер
         </h1>
 
-        <menu className={styles.menu}>
+        <div className={styles.menu}>
             {ingredientGroups.map((group, nIndex) => 
                 <Tab value={group.groupName} key={nIndex}>
                     {group.groupName}
                 </Tab>
             )}
-        </menu>
+        </div>
 
-        <div className={`${styles.groupsContainer} mt-8`}>
+        <div className={styles.groupsContainer}>
             {ingredientGroups.map((group, nIndex) => 
                 <IngredientItemGroup groupName={group.groupName} ingredients={group.ingredients} key={nIndex} />
             )}
         </div>
-        
+
       </section>
   );
 };

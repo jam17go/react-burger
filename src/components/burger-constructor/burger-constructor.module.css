@@ -1,4 +1,5 @@
 .section {
+    composes: ml-10 from global;
     display: inline-block;
     max-width: 600px;
     min-width: 600px;
@@ -8,15 +9,20 @@
 }
 
 .selectedList {
+    composes: mt-25 ml-4 mr-4 from global;
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
+.bunElement {
+    composes: ml-4 from global;
+}
+
 .selectedItem {
     display: flex;
     align-items: center;
-    width: 100%; /* Ensure selected item takes full width */
+    width: 100%;
 }
 
 .listScrollable{
@@ -29,4 +35,15 @@
     list-style-type: none;
     padding: 0;
     gap: 10px;
+}
+
+.buttonBox {
+    composes: mt-10 mb-10 from global;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+
+.currency {
+    composes: text text_type_digits-medium mr-10 from global;
 }

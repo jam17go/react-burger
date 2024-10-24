@@ -1,9 +1,6 @@
 import styles from './ingredient-item.module.css';
 import {
-  ConstructorElement, 
-  Button,
   CurrencyIcon,
-  DragIcon,
   Counter
 } from '@ya.praktikum/react-developer-burger-ui-components';
 
@@ -11,15 +8,20 @@ const IngredientItem = ({item}) => {
   return (
     <>
       <div key={item._id} className={styles.ingredientItem}>
-        <Counter count={1} size="default" extraClass="m-1" />  
+
+        <Counter count={1} size="default" extraClass="m-1" />
+        
         <img src={item.image} alt={item.name} />
-        <p className={`${styles.items__component__price} text text_type_digits-default`}>
-            <span className={styles.items__component__price_digits}>{item.price}&nbsp;</span>
+        
+        <div className={styles.price}>
+            <div>{item.price}&nbsp;</div>
             <CurrencyIcon />
-        </p>
-        <p className={`${styles.items__component__name} mt-1 text text_type_main_small`}>
+        </div>
+        
+        <div className={styles.itemName}>
               {item.name}
-        </p>
+        </div>
+    
       </div>
     </>
   );

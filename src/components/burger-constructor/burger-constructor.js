@@ -9,9 +9,9 @@ import {
 
 const BurgerConstructor = () => {
     return (
-        <div className={`${styles.section} ml-10`}>
-            <div className={`${styles.selectedList} mt-25 ml-4 mr-4`}>
-                <div className='ml-4'>
+        <div className={styles.section}>
+            <div className={styles.selectedList}>
+                <div className={styles.bunElement}>
                     <ConstructorElement 
                         type='top'
                         isLocked={true}
@@ -34,7 +34,7 @@ const BurgerConstructor = () => {
                     ))}
                 </div>
 
-                <div className='ml-4'>
+                <div className={styles.bunElement}>
                     <ConstructorElement 
                         type='bottom'
                         isLocked={true}
@@ -45,8 +45,8 @@ const BurgerConstructor = () => {
                 </div>
 
                 <div>
-                    <div className='mt-10' style={{ display: 'flex', justifyContent: 'end', alignItems: 'center'}}>
-                        <div className='text text_type_digits-medium mr-10'>
+                    <div className={styles.buttonBox}>
+                        <div className={styles.currency}>
                             610
                             <CurrencyIcon type="primary" />
                         </div>
