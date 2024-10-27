@@ -1,50 +1,51 @@
-import styles from './burger-ingredients.module.css';
-import { ingredientsData } from '../../utils/data.js';
-import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
-import IngredientItemGroup from './ingredient-item-group/ingredient-item-group';
+import styles from "./burger-ingredients.module.css";
+import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
+import IngredientItemGroup from "./ingredient-item-group/ingredient-item-group";
+import PropTypes from "prop-types";
 
-const BurgerIngredients = () => {
-  const buns = ingredientsData.filter(ingredient => ingredient.type === 'bun');
-  const sauces = ingredientsData.filter(ingredient => ingredient.type === 'sauce');
-  const mains = ingredientsData.filter(ingredient => ingredient.type === 'main');
-
-  const ingredientGroups = [
-    {
-      groupName: 'Булки',
-      ingredients: buns
-    },
-    {
-      groupName: 'Соусы',
-      ingredients: sauces
-    },
-    {
-      groupName: 'Начинки',
-      ingredients: mains
-    }
-  ];
-
+const BurgerIngredients = ({ ingredientGroups }) => {
   return (
-      <section className={styles.section}>
-        <h1 className={styles.header}>
-            Соберите бургер
-        </h1>
+    <div className={styles.section}>
+      <div className={styles.header}>Соберите бургер</div>
 
-        <div className={styles.menu}>
-            {ingredientGroups.map((group, nIndex) => 
-                <Tab value={group.groupName} key={nIndex}>
-                    {group.groupName}
-                </Tab>
-            )}
-        </div>
+      <div className={styles.tabs}>
+        {ingredientGroups.map((group, index) => (
+          <div key={index}>
+            <Tab value={group.groupName}>
+              {group.groupName}
+            </Tab>
+          </div>
+        ))}
+      </div>
 
-        <div className={styles.groupsContainer}>
-            {ingredientGroups.map((group, nIndex) => 
-                <IngredientItemGroup groupName={group.groupName} ingredients={group.ingredients} key={nIndex} />
-            )}
-        </div>
-
-      </section>
+      <div className={styles.groups}>
+        {ingredientGroups.map((group, index) => (
+          <div key={index}>
+            <IngredientItemGroup
+              groupName={group.groupName}
+              ingredients={group.ingredients}
+            />
+          </div>
+        ))}
+      </div>
+    </div>
   );
+};
+
+BurgerIngredients.propTypes = {
+  ingredientGroups: PropTypes.arrayOf(
+    PropTypes.shape({
+      groupName: PropTypes.string.isRequired,
+      ingredients: PropTypes.arrayOf(
+        PropTypes.shape({
+          _id: PropTypes.string.isRequired,
+          name: PropTypes.string.isRequired,
+          image: PropTypes.string.isRequired,
+          price: PropTypes.number.isRequired,
+        })
+      ).isRequired,
+    })
+  ).isRequired,
 };
 
 export default BurgerIngredients;

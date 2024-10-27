@@ -1,49 +1,49 @@
 .section {
-    composes: ml-10 from global;
-    display: inline-block;
-    max-width: 600px;
-    min-width: 600px;
-    width: 100%;
-    height: 100%;
-    vertical-align: top;
+  composes: ml-10 from global;
+  display: inline-block;
+  max-width: 600px;
+  min-width: 600px;
+  width: 100%;
+  height: 100%;
+  vertical-align: top;
 }
 
-.selectedList {
-    composes: mt-25 ml-4 mr-4 from global;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+.listContainer {
+  composes: mt-25 ml-4 from global;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .bunElement {
-    composes: ml-4 from global;
+  composes: ml-4 from global;
 }
 
-.selectedItem {
-    display: flex;
-    align-items: center;
-    width: 100%;
+.item {
+  display: flex;
+  align-items: center;
+  width: 100%;
 }
 
-.listScrollable{
-    max-height: 60vh;
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-    margin: 0;
-    text-align: center;
-    list-style-type: none;
-    padding: 0;
-    gap: 10px;
+.list {
+  max-height: 60vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  text-align: center;
+  list-style-type: none;
+  padding: 0;
+  gap: 10px;
 }
 
 .buttonBox {
-    composes: mt-10 mb-10 from global;
-    display: flex;
-    justify-content: end;
-    align-items: center;
+  composes: mt-10 mb-10 from global;
+  display: flex;
+  justify-content: end;
+  align-items: center;
 }
 
 .currency {
-    composes: text text_type_digits-medium mr-10 from global;
+  composes: text text_type_digits-medium mr-10 from global;
 }

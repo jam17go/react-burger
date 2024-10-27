@@ -1,14 +1,14 @@
 .header {
-    background-color: #1C1C21;
-    box-sizing: border-box;
+  background-color: #1c1c21;
+  box-sizing: border-box;
 }
-  
-.navContainer {
-    composes: pt-4 pb-4 from global;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 1240px;
-    margin: 0 auto;
-    position: relative;
+
+.menu {
+  composes: pt-8 pb-8 from global;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1240px;
+  margin: 0 auto;
+  position: relative;
 }

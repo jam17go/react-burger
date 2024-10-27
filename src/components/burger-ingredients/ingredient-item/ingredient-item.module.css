@@ -7,6 +7,7 @@
   border-radius: 8px;
   text-align: center;
   position: relative;
+  cursor: pointer;
 }
 
 .price {
@@ -15,6 +16,6 @@
   display: flex;
 }
 
-.itemName {
-  composes:  mt-1 text_type_main-default from global;
+.name {
+  composes: mt-1 text_type_main-default from global;
 }

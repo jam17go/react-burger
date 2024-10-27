@@ -1,14 +1,21 @@
-import styles from './ingredient-selected.module.css';
+import styles from "./ingredient-selected.module.css";
+import PropTypes from "prop-types";
 
-const IngredientSelected = ({item}) => {
+const IngredientSelected = ({ item }) => {
   return (
-    <>
-      <div key={item._id} className={styles.ingredientItem}>
-        <p>{item.name}</p>
-        <p>{item.price}</p>
-      </div>
-    </>
+    <div key={item._id} className={styles.item}>
+      <p>{item.name}</p>
+      <p>{item.price}</p>
+    </div>
   );
+};
+
+IngredientSelected.propTypes = {
+  item: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+  }),
 };
 
 export default IngredientSelected;
