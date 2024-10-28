@@ -6,17 +6,20 @@ import {
 import { useState } from "react";
 import ModalWindow from "../../modal-window/modal-window";
 import IngredientDetails from "../../ingredient-details/ingredient-details";
-import PropTypes from "prop-types";
+import { ingredientItemPropType } from "../../../types/prop-types";
 
 const IngredientItem = ({ item }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
     <div>
-      <div key={item._id} className={styles.ingredientItem} onClick={() => setIsModalOpen(true)}>
+      <div
+        className={styles.ingredientItem}
+        onClick={() => setIsModalOpen(true)}
+      >
         <Counter count={1} />
 
-        <img src={item.image} />
+        <img src={item.image} alt={item.name} />
 
         <div className={styles.price}>
           <div>{item.price}&nbsp;</div>
@@ -27,19 +30,14 @@ const IngredientItem = ({ item }) => {
       </div>
 
       <ModalWindow isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-        <IngredientDetails item={item}></IngredientDetails>
+        <IngredientDetails item={item} />
       </ModalWindow>
     </div>
   );
 };
 
 IngredientItem.propTypes = {
-  item: PropTypes.shape({
-    _id: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    image: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-  }),
+  item: ingredientItemPropType,
 };
 
 export default IngredientItem;

@@ -1,6 +1,7 @@
 import styles from "./ingredient-item-group.module.css";
 import IngredientItem from "../ingredient-item/ingredient-item";
 import PropTypes from "prop-types";
+import { ingredientItemPropType } from "../../../types/prop-types";
 
 const IngredientItemGroup = ({ groupName, ingredients }) => {
   return (
@@ -19,14 +20,7 @@ const IngredientItemGroup = ({ groupName, ingredients }) => {
 
 IngredientItemGroup.propTypes = {
   groupName: PropTypes.string.isRequired,
-  ingredients: PropTypes.arrayOf(
-    PropTypes.shape({
-      _id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      image: PropTypes.string.isRequired,
-      price: PropTypes.number.isRequired,
-    })
-  ).isRequired,
+  ingredients: PropTypes.arrayOf(ingredientItemPropType).isRequired,
 };
 
 export default IngredientItemGroup;

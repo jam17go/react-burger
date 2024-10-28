@@ -9,6 +9,7 @@ import { useState } from "react";
 import ModalWindow from "../modal-window/modal-window";
 import OrderDetails from "../order-details/order-details";
 import PropTypes from "prop-types";
+import { ingredientItemPropType } from "../../types/prop-types";
 
 const BurgerConstructor = ({ ingredientsSelected, bunSelected }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -53,14 +54,17 @@ const BurgerConstructor = ({ ingredientsSelected, bunSelected }) => {
           <div className={styles.buttonBox}>
             <div className={styles.currency}>
               610&nbsp;
-              <CurrencyIcon/>
+              <CurrencyIcon />
             </div>
 
             <div onClick={() => setIsModalOpen(true)}>
               <Button htmlType="button">Оформить заказ</Button>
             </div>
 
-            <ModalWindow isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+            <ModalWindow
+              isOpen={isModalOpen}
+              onClose={() => setIsModalOpen(false)}
+            >
               <OrderDetails orderId="034536"></OrderDetails>
             </ModalWindow>
           </div>
@@ -71,19 +75,9 @@ const BurgerConstructor = ({ ingredientsSelected, bunSelected }) => {
 };
 
 BurgerConstructor.propTypes = {
-  ingredientsSelected: PropTypes.arrayOf(
-    PropTypes.shape({
-      _id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      image: PropTypes.string.isRequired,
-      price: PropTypes.number.isRequired,
-    })
-  ).isRequired,
+  ingredientsSelected: PropTypes.arrayOf(ingredientItemPropType).isRequired,
   bunSelected: PropTypes.shape({
-    _id: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    image: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
+    ingredientItemPropType,
   }).isRequired,
 };
 

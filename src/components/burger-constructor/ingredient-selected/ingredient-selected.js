@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 const IngredientSelected = ({ item }) => {
   return (
-    <div key={item._id} className={styles.item}>
+    <div className={styles.item}>
       <p>{item.name}</p>
       <p>{item.price}</p>
     </div>
