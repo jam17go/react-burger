@@ -1,0 +1,14 @@
+.header {
+  background-color: #1c1c21;
+  box-sizing: border-box;
+}
+
+.menu {
+  composes: pt-8 pb-8 from global;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1240px;
+  margin: 0 auto;
+  position: relative;
+}

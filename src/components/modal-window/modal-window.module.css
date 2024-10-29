@@ -1,0 +1,44 @@
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* High z-index to place it above other elements */
+}
+
+.modalContent {
+  position: relative; /* Positioned relative to keep within the overlay */
+  background: #1c1c21;
+  padding: 20px;
+  border-radius: 20px;
+  width: 300px;
+  z-index: 1010; /* Slightly higher z-index to ensure it's above the overlay */
+  min-width: 720px;
+  max-width: 720px;
+}
+
+body.modalOpen {
+  overflow: hidden;
+}
+
+.modalHeader {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.closeButton {
+  cursor: pointer;
+}
+
+.children {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  text-align: center;
+}

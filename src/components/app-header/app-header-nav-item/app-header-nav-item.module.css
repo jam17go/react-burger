@@ -1,0 +1,12 @@
+.navItem {
+  composes: pr-5 pl-5 from global;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.navText {
+  composes: ml-2 text text_type_main-default from global;
+  color: #f2f2f3;
+  font-size: 16px;
+}

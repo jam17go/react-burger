@@ -1,0 +1,15 @@
+.order {
+  composes: text text_type_digits-large pb-8 from global;
+}
+
+.orderDescription {
+  composes: text text_type_main-medium pb-15 from global;
+}
+
+.orderStart {
+  composes: text text_type_main-small pb-2 pt-15 from global;
+}
+
+.orderMessage {
+  composes: text text_type_main-small text_color_inactive pb-15 from global;
+}
