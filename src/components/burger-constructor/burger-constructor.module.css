@@ -47,3 +47,10 @@
 .currency {
   composes: text text_type_digits-medium mr-10 from global;
 }
+
+.emptyList {
+  composes: text text_type_main-medium from global;
+  margin: 0 auto;
+  max-height: 60vh;
+  min-height: 60vh;
+}

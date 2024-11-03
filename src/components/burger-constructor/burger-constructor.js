@@ -10,21 +10,49 @@ import ModalWindow from "../modal-window/modal-window";
 import OrderDetails from "../order-details/order-details";
 import PropTypes from "prop-types";
 import { ingredientItemPropType } from "../../types/prop-types";
+import { useDispatch, useSelector } from "react-redux";
+import { removeIngredient } from "../../services/burger-constructor/actions";
+import { getTotalPrice } from "../../services/burger-constructor/selectors";
+import { getOrderIngredientsList } from "../../services/burger-constructor/selectors";
 
 const BurgerConstructor = ({ ingredientsSelected, bunSelected }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const totalPrice = useSelector(getTotalPrice);
+
+  const orderIngredientsList = useSelector(getOrderIngredientsList);  
+
+  const dispatch = useDispatch();
+
+  const handleRemoveIngredient = (ingredient) => () => {
+    dispatch(removeIngredient(ingredient));
+  }
+
+  if (!ingredientsSelected.length && !bunSelected) {
+    return (
+      <div className={styles.section}>
+        <div className={styles.listContainer}>
+          <div className={styles.emptyList}>
+            <p>Добавьте ингредиенты</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className={styles.section}>
       <div className={styles.listContainer}>
         <div className={styles.bunElement}>
-          <ConstructorElement
-            type="top"
-            isLocked={true}
-            text={bunSelected.name}
-            price={bunSelected.price}
-            thumbnail={bunSelected.image}
-          />
+          {bunSelected && (
+            <ConstructorElement
+              type="top"
+              isLocked={true}
+              text={bunSelected.name}
+              price={bunSelected.price}
+              thumbnail={bunSelected.image}
+            />
+          )}
         </div>
 
         <div className={styles.list}>
@@ -35,25 +63,28 @@ const BurgerConstructor = ({ ingredientsSelected, bunSelected }) => {
                 text={ingredient.name}
                 price={ingredient.price}
                 thumbnail={ingredient.image}
+                handleClose={handleRemoveIngredient(ingredient)}
               />
             </div>
           ))}
         </div>
 
         <div className={styles.bunElement}>
-          <ConstructorElement
-            type="bottom"
-            isLocked={true}
-            text={bunSelected.name}
-            price={bunSelected.price}
-            thumbnail={bunSelected.image}
-          />
+          {bunSelected && (
+            <ConstructorElement
+              type="bottom"
+              isLocked={true}
+              text={bunSelected.name}
+              price={bunSelected.price}
+              thumbnail={bunSelected.image}
+            />
+          )}
         </div>
 
         <div>
           <div className={styles.buttonBox}>
             <div className={styles.currency}>
-              610&nbsp;
+              { totalPrice }&nbsp;
               <CurrencyIcon />
             </div>
 
@@ -65,7 +96,7 @@ const BurgerConstructor = ({ ingredientsSelected, bunSelected }) => {
               isOpen={isModalOpen}
               onClose={() => setIsModalOpen(false)}
             >
-              <OrderDetails orderId="034536"></OrderDetails>
+              <OrderDetails ingredients={orderIngredientsList}></OrderDetails>
             </ModalWindow>
           </div>
         </div>
@@ -75,10 +106,10 @@ const BurgerConstructor = ({ ingredientsSelected, bunSelected }) => {
 };
 
 BurgerConstructor.propTypes = {
-  ingredientsSelected: PropTypes.arrayOf(ingredientItemPropType).isRequired,
+  ingredientsSelected: PropTypes.arrayOf(ingredientItemPropType),
   bunSelected: PropTypes.shape({
     ingredientItemPropType,
-  }).isRequired,
+  }),
 };
 
 export default BurgerConstructor;

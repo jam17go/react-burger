@@ -13,3 +13,7 @@
 .orderMessage {
   composes: text text_type_main-small text_color_inactive pb-15 from global;
 }
+
+.orderProgress {
+  composes: text text_type_main-large pb-8 from global;
+}

@@ -7,17 +7,28 @@ import { useState } from "react";
 import ModalWindow from "../../modal-window/modal-window";
 import IngredientDetails from "../../ingredient-details/ingredient-details";
 import { ingredientItemPropType } from "../../../types/prop-types";
+import { useDispatch, useSelector } from "react-redux";
+import { addIngredient } from "../../../services/burger-constructor/actions";
+import { getItemCount } from "../../../services/burger-constructor/selectors";
 
 const IngredientItem = ({ item }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const itemCount = useSelector((state) => getItemCount(state, item));
+  const dispatch = useDispatch();
+
+  const handleAddIngredient = () => {
+    dispatch(addIngredient(item));
+  };
 
   return (
     <div>
+      <button onClick={handleAddIngredient}>Add</button>
+
       <div
         className={styles.ingredientItem}
         onClick={() => setIsModalOpen(true)}
       >
-        <Counter count={1} />
+        {itemCount > 0 && <Counter count={itemCount} />}
 
         <img src={item.image} alt={item.name} />
 
