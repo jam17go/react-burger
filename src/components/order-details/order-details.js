@@ -4,18 +4,9 @@ import styles from "./order-details.module.css";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getOrderState } from "../../services/order/selectors";
-import { placeOrder } from "../../services/order/actions";
-import { cleanupConstructorState } from "../../services/burger-constructor/actions";
-import { resetOrder } from "../../services/order/actions";
 
-const OrderDetails = ({ ingredients }) => {
-  const dispatch = useDispatch();
-
+const OrderDetails = () => {
   const { loading, error, order } = useSelector(getOrderState);
-  
-  useEffect(() => {
-    dispatch(placeOrder(ingredients));
-  }, []);
 
   if (loading) {
     return (

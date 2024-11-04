@@ -8,6 +8,7 @@ import {
 const initialState = {
   ingredients: [],
   bun: null,
+  activeIngredientGroup: "Булки",
 };
 
 export const reducer = (state = initialState, action) => {

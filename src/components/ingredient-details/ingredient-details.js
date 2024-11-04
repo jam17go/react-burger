@@ -2,6 +2,7 @@ import styles from "./ingredient-details.module.css";
 import PropTypes from "prop-types";
 import IngredientProperty from "./ingredient-property/ingredient-property";
 
+
 const IngredientDetails = ({ item }) => {
   return (
     <div>
@@ -18,8 +19,6 @@ const IngredientDetails = ({ item }) => {
   );
 };
 
-IngredientDetails.propTypes = {
-  item: PropTypes.object.isRequired,
-};
+IngredientDetails.propTypes = {};
 
 export default IngredientDetails;

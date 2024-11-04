@@ -18,6 +18,9 @@ import { getOrderIngredientsList } from "../../services/burger-constructor/selec
 import { useDrop, useDrag } from "react-dnd";
 import { getSelectedIngredients } from "../../services/burger-constructor/selectors.js";
 import { DraggableIngredient } from "./draggable-ingredient/draggable-ingredient";
+import { placeOrder } from "../../services/order/actions";
+import { cleanupConstructorState } from "../../services/burger-constructor/actions";
+import { resetOrder } from "../../services/order/actions";
 
 const BurgerConstructor = () => {
   const { ingredients, bun } = useSelector(getSelectedIngredients);
@@ -25,8 +28,6 @@ const BurgerConstructor = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const totalPrice = useSelector(getTotalPrice);
-
-  const orderIngredientsList = useSelector(getOrderIngredientsList);
 
   const dispatch = useDispatch();
 
@@ -37,11 +38,30 @@ const BurgerConstructor = () => {
     },
   });
 
+  const onOpenOrder = () => {
+    setIsModalOpen(true);
+
+    dispatch(placeOrder(ingredients));
+  }
+
+  const onCloseOrder = () => {
+    setIsModalOpen(false);
+
+    dispatch(cleanupConstructorState());
+    dispatch(resetOrder());
+  }
+
   return (
     <div ref={dropRef} className={styles.section}>
       <div className={styles.listContainer}>
-        <div className={styles.bunElement}>
-          {bun && (
+        {!bun && (
+          <div className={styles.emptyBun}>
+            <div>Перетащи булку сюда</div>
+          </div>
+        )}
+
+        {bun && (
+          <div className={styles.bunElement}>
             <ConstructorElement
               type="top"
               isLocked={true}
@@ -49,21 +69,35 @@ const BurgerConstructor = () => {
               price={bun.price}
               thumbnail={bun.image}
             />
-          )}
-        </div>
+          </div>
+        )}
 
-        <div className={styles.list}>
-          {ingredients.map((ingredient, index) => (
-            <DraggableIngredient
-              ingredient={ingredient}
-              index={index}
-              key={ingredient.listId}
-            />
-          ))}
-        </div>
+        {!ingredients.length && (
+          <div className={styles.emptyList}>
+            <div>Перетащи ингредиенты сюда</div>
+          </div>
+        )}
 
-        <div className={styles.bunElement}>
-          {bun && (
+        {ingredients.length > 0 && (
+          <div className={styles.list}>
+            {ingredients.map((ingredient, index) => (
+              <DraggableIngredient
+                ingredient={ingredient}
+                index={index}
+                key={ingredient.listId}
+              />
+            ))}
+          </div>
+        )}
+
+        {!bun && (
+          <div className={styles.emptyBun}>
+            <div>Перетащи булку сюда</div>
+          </div>
+        )}
+
+        {bun && (
+          <div className={styles.bunElement}>
             <ConstructorElement
               type="bottom"
               isLocked={true}
@@ -71,8 +105,8 @@ const BurgerConstructor = () => {
               price={bun.price}
               thumbnail={bun.image}
             />
-          )}
-        </div>
+          </div>
+        )}
 
         <div>
           <div className={styles.buttonBox}>
@@ -81,15 +115,15 @@ const BurgerConstructor = () => {
               <CurrencyIcon />
             </div>
 
-            <div onClick={() => setIsModalOpen(true)}>
+            <div onClick={onOpenOrder}>
               <Button htmlType="button">Оформить заказ</Button>
             </div>
 
             <ModalWindow
               isOpen={isModalOpen}
-              onClose={() => setIsModalOpen(false)}
+              onClose={onCloseOrder}
             >
-              <OrderDetails ingredients={orderIngredientsList}></OrderDetails>
+              <OrderDetails/>
             </ModalWindow>
           </div>
         </div>
