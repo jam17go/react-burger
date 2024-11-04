@@ -2,6 +2,7 @@ import {
   ADD_INGREDIENT,
   REMOVE_INGREDIENT,
   CLEANUP_CONSTRUCTOR_STATE,
+  MOVE_INGREDIENT,
 } from "./actions.js";
 
 const initialState = {
@@ -32,6 +33,17 @@ export const reducer = (state = initialState, action) => {
     case CLEANUP_CONSTRUCTOR_STATE:
       return {
         ...initialState,
+      };
+    case MOVE_INGREDIENT:
+      const { dragIndex, hoverIndex } = action.payload;
+      const dragIngredient = state.ingredients[dragIndex];
+      const updatedIngredients = [...state.ingredients];
+      updatedIngredients.splice(dragIndex, 1);
+      updatedIngredients.splice(hoverIndex, 0, dragIngredient);
+
+      return {
+        ...state,
+        ingredients: updatedIngredients
       };
     default:
       return state;

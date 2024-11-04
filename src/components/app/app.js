@@ -9,10 +9,12 @@ import { getSelectedIngredients } from "../../services/burger-constructor/select
 import { loadIngredients } from "../../services/burger-ingredients/actions.js";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 
 function App() {
   const { ingredientGroups, loading, error } = useSelector(getIngredientGroups);
-  const { ingredients, bun } = useSelector(getSelectedIngredients);
+  // const { ingredients, bun } = useSelector(getSelectedIngredients);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -22,15 +24,14 @@ function App() {
   return (
     <div className={styles.wrapper}>
       <AppHeader />
-      <div className={styles.main}>
-        <AppMain loading={loading} error={error}>
-          <BurgerIngredients ingredientGroups={ingredientGroups} />
-          <BurgerConstructor
-            ingredientsSelected={ingredients}
-            bunSelected={bun}
-          />
-        </AppMain>
-      </div>
+      <DndProvider backend={HTML5Backend}>
+        <div className={styles.main}>
+          <AppMain loading={loading} error={error}>
+            <BurgerIngredients ingredientGroups={ingredientGroups} />
+            <BurgerConstructor/>
+          </AppMain>
+        </div>
+      </DndProvider>
     </div>
   );
 }

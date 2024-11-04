@@ -26,8 +26,8 @@
 }
 
 .list {
-  max-height: 60vh;
-  overflow-y: auto;
+  height: 60vh;          /* Set a fixed height */
+  overflow-y: scroll;     /* Always show the scrollbar */
   display: flex;
   flex-direction: column;
   margin: 0;

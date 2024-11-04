@@ -5,78 +5,71 @@ import {
   CurrencyIcon,
   DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import ModalWindow from "../modal-window/modal-window";
 import OrderDetails from "../order-details/order-details";
-import PropTypes from "prop-types";
-import { ingredientItemPropType } from "../../types/prop-types";
 import { useDispatch, useSelector } from "react-redux";
-import { removeIngredient } from "../../services/burger-constructor/actions";
+import {
+  addIngredient,
+  removeIngredient,
+} from "../../services/burger-constructor/actions";
 import { getTotalPrice } from "../../services/burger-constructor/selectors";
 import { getOrderIngredientsList } from "../../services/burger-constructor/selectors";
+import { useDrop, useDrag } from "react-dnd";
+import { getSelectedIngredients } from "../../services/burger-constructor/selectors.js";
+import { DraggableIngredient } from "./draggable-ingredient/draggable-ingredient";
 
-const BurgerConstructor = ({ ingredientsSelected, bunSelected }) => {
+const BurgerConstructor = () => {
+  const { ingredients, bun } = useSelector(getSelectedIngredients);
+
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const totalPrice = useSelector(getTotalPrice);
 
-  const orderIngredientsList = useSelector(getOrderIngredientsList);  
+  const orderIngredientsList = useSelector(getOrderIngredientsList);
 
   const dispatch = useDispatch();
 
-  const handleRemoveIngredient = (ingredient) => () => {
-    dispatch(removeIngredient(ingredient));
-  }
-
-  if (!ingredientsSelected.length && !bunSelected) {
-    return (
-      <div className={styles.section}>
-        <div className={styles.listContainer}>
-          <div className={styles.emptyList}>
-            <p>Добавьте ингредиенты</p>
-          </div>
-        </div>
-      </div>
-    );
-  }
+  const [, dropRef] = useDrop({
+    accept: "ingredient",
+    drop(item) {
+      dispatch(addIngredient(item));
+    },
+  });
 
   return (
-    <div className={styles.section}>
+    <div ref={dropRef} className={styles.section}>
       <div className={styles.listContainer}>
         <div className={styles.bunElement}>
-          {bunSelected && (
+          {bun && (
             <ConstructorElement
               type="top"
               isLocked={true}
-              text={bunSelected.name}
-              price={bunSelected.price}
-              thumbnail={bunSelected.image}
+              text={bun.name}
+              price={bun.price}
+              thumbnail={bun.image}
             />
           )}
         </div>
 
         <div className={styles.list}>
-          {ingredientsSelected.map((ingredient, index) => (
-            <div className={styles.item} key={index}>
-              <DragIcon />
-              <ConstructorElement
-                text={ingredient.name}
-                price={ingredient.price}
-                thumbnail={ingredient.image}
-                handleClose={handleRemoveIngredient(ingredient)}
-              />
-            </div>
+          {ingredients.map((ingredient, index) => (
+            <DraggableIngredient
+              ingredient={ingredient}
+              index={index}
+              key={ingredient.listId}
+            />
           ))}
         </div>
 
         <div className={styles.bunElement}>
-          {bunSelected && (
+          {bun && (
             <ConstructorElement
               type="bottom"
               isLocked={true}
-              text={bunSelected.name}
-              price={bunSelected.price}
-              thumbnail={bunSelected.image}
+              text={bun.name}
+              price={bun.price}
+              thumbnail={bun.image}
             />
           )}
         </div>
@@ -84,7 +77,7 @@ const BurgerConstructor = ({ ingredientsSelected, bunSelected }) => {
         <div>
           <div className={styles.buttonBox}>
             <div className={styles.currency}>
-              { totalPrice }&nbsp;
+              {totalPrice}&nbsp;
               <CurrencyIcon />
             </div>
 
@@ -105,11 +98,6 @@ const BurgerConstructor = ({ ingredientsSelected, bunSelected }) => {
   );
 };
 
-BurgerConstructor.propTypes = {
-  ingredientsSelected: PropTypes.arrayOf(ingredientItemPropType),
-  bunSelected: PropTypes.shape({
-    ingredientItemPropType,
-  }),
-};
+BurgerConstructor.propTypes = {};
 
 export default BurgerConstructor;

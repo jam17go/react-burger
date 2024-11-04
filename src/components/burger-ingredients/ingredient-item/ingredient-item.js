@@ -7,23 +7,21 @@ import { useState } from "react";
 import ModalWindow from "../../modal-window/modal-window";
 import IngredientDetails from "../../ingredient-details/ingredient-details";
 import { ingredientItemPropType } from "../../../types/prop-types";
-import { useDispatch, useSelector } from "react-redux";
-import { addIngredient } from "../../../services/burger-constructor/actions";
+import { useSelector } from "react-redux";
 import { getItemCount } from "../../../services/burger-constructor/selectors";
+import { useDrag } from "react-dnd"; 
 
 const IngredientItem = ({ item }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const itemCount = useSelector((state) => getItemCount(state, item));
-  const dispatch = useDispatch();
 
-  const handleAddIngredient = () => {
-    dispatch(addIngredient(item));
-  };
+  const [, dragRef] = useDrag({
+    type: "ingredient",
+    item: item
+  });
 
   return (
-    <div>
-      <button onClick={handleAddIngredient}>Add</button>
-
+    <div ref={dragRef}>
       <div
         className={styles.ingredientItem}
         onClick={() => setIsModalOpen(true)}
