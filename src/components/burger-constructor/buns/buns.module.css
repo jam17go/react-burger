@@ -1,0 +1,19 @@
+.bunElement {
+  composes: ml-4 from global;
+}
+
+.emptyBun {
+  composes: text text_type_main-medium from global;
+  height: 75px;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  list-style-type: none;
+  padding: 0;
+  border: 2px dotted #999;
+  border-radius: 40px;
+}

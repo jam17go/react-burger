@@ -22,7 +22,7 @@ export const reducer = (state = initialState, action) => {
       }
       return {
         ...state,
-        ingredients: [...state.ingredients, {...action.payload}],
+        ingredients: [...state.ingredients, { ...action.payload }],
       };
     case REMOVE_INGREDIENT:
       return {
@@ -44,7 +44,7 @@ export const reducer = (state = initialState, action) => {
 
       return {
         ...state,
-        ingredients: updatedIngredients
+        ingredients: updatedIngredients,
       };
     default:
       return state;

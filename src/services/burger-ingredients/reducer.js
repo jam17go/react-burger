@@ -5,10 +5,10 @@ import {
 } from "./actions.js";
 
 export const initialState = {
-    ingredientGroups: [],
-    loading: false,
-    error: false,
-}
+  ingredientGroups: [],
+  loading: false,
+  error: false,
+};
 
 export const reducer = (state = initialState, action) => {
   switch (action.type) {

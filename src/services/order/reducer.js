@@ -2,7 +2,7 @@ import {
   PLACE_ORDER_ERROR,
   PLACE_ORDER_PENDING,
   PLACE_ORDER_SUCCESS,
-  PLACE_ORDER_RESET
+  PLACE_ORDER_RESET,
 } from "./actions.js";
 
 export const initialState = {

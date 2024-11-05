@@ -40,6 +40,6 @@ export const loadIngredients = () => (dispatch) => {
       });
     })
     .catch(() => {
-      dispatch({type: INGREDIENTS_ERROR});
+      dispatch({ type: INGREDIENTS_ERROR });
     });
 };

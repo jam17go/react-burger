@@ -1,3 +1,3 @@
 const getCurrentIngredient = (state) => {
-    return state.ingredientDetails.currentIngredient;
+  return state.ingredientDetails.currentIngredient;
 };

@@ -25,11 +25,11 @@ export const cleanupConstructorState = () => {
   return {
     type: CLEANUP_CONSTRUCTOR_STATE,
   };
-}
+};
 
 export const moveIngredient = (dragIndex, hoverIndex) => {
   return {
     type: MOVE_INGREDIENT,
     payload: { dragIndex, hoverIndex },
   };
-}
+};

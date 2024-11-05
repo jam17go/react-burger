@@ -4,4 +4,3 @@ export const setCurrentIngredient = (ingredient) => ({
   type: SET_CURRENT_INGREDIENT,
   payload: ingredient,
 });
-

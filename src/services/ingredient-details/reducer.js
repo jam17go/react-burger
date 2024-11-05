@@ -1,6 +1,4 @@
-import {
-  SET_CURRENT_INGREDIENT,
-} from "./actions.js";
+import { SET_CURRENT_INGREDIENT } from "./actions.js";
 
 export const initialState = {
   currentIngredient: null,

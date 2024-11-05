@@ -1,8 +1,3 @@
-export const getOrderState = (state) => {
-
-    return {
-        loading: state.order.loading,
-        error: state.order.error,
-        order: state.order.order,
-    }
-}
+export const getOrder = (state) => state.order.order;
+export const getOrderErrorStatus = (state) => state.order.error;
+export const getOrderLoadingStatus = (state) => state.order.loading;

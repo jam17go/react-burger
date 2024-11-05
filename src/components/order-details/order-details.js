@@ -1,12 +1,12 @@
-import PropTypes from "prop-types";
 import { CheckMarkIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./order-details.module.css";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getOrderState } from "../../services/order/selectors";
+import { useSelector } from "react-redux";
+import { getOrder, getOrderErrorStatus, getOrderLoadingStatus } from "../../services/order/selectors";
 
 const OrderDetails = () => {
-  const { loading, error, order } = useSelector(getOrderState);
+  const loading = useSelector(getOrderLoadingStatus);
+  const error = useSelector(getOrderErrorStatus);
+  const order = useSelector(getOrder);
 
   if (loading) {
     return (

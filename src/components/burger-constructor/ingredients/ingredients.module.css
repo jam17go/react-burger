@@ -1,0 +1,28 @@
+.list {
+  min-height: 60vh;
+  max-height: 60vh;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  text-align: center;
+  list-style-type: none;
+  padding: 0;
+  gap: 10px;
+}
+
+.emptyList {
+  composes: text text_type_main-medium from global;
+  height: 60vh;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  list-style-type: none;
+  padding: 0;
+  border: 2px dotted #999;
+  border-radius: 40px;
+}

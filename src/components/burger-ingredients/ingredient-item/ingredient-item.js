@@ -9,7 +9,7 @@ import IngredientDetails from "../../ingredient-details/ingredient-details";
 import { ingredientItemPropType } from "../../../types/prop-types";
 import { useSelector } from "react-redux";
 import { getItemCount } from "../../../services/burger-constructor/selectors";
-import { useDrag } from "react-dnd"; 
+import { useDrag } from "react-dnd";
 import { setCurrentIngredient } from "../../../services/ingredient-details/actions";
 import { useDispatch } from "react-redux";
 
@@ -20,27 +20,24 @@ const IngredientItem = ({ item }) => {
 
   const [, dragRef] = useDrag({
     type: "ingredient",
-    item: item
+    item: item,
   });
 
   const onClickHandler = () => {
     setIsModalOpen(true);
 
     dispatch(setCurrentIngredient(item));
-  }
+  };
 
   const onCloseHandler = () => {
     setIsModalOpen(false);
 
     dispatch(setCurrentIngredient(null));
-  }
+  };
 
   return (
     <div ref={dragRef}>
-      <div
-        className={styles.ingredientItem}
-        onClick={onClickHandler}
-      >
+      <div className={styles.ingredientItem} onClick={onClickHandler}>
         {itemCount > 0 && <Counter count={itemCount} />}
 
         <img src={item.image} alt={item.name} />

@@ -1,11 +1,14 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import styles from "./burger-ingredients.module.css";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import IngredientItemGroup from "./ingredient-item-group/ingredient-item-group";
 import PropTypes from "prop-types";
 import { ingredientItemPropType } from "../../types/prop-types";
+import { useSelector } from "react-redux";
+import { getIngredientGroupsData } from "../../services/burger-ingredients/selectors.js";
 
-const BurgerIngredients = ({ ingredientGroups }) => {
+const BurgerIngredients = () => {
+  const ingredientGroups = useSelector(getIngredientGroupsData);
   const [currentTab, setCurrentTab] = useState();
   const tabRef = useRef(null);
   const groupRefs = useRef([]);
