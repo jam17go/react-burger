@@ -6,7 +6,7 @@ const IngredientDetails = ({ item }) => {
   return (
     <div>
       <div className={styles.header}>Детали ингредиента</div>
-      <img src={item.image_large} alt={item.name}/>
+      <img src={item.image_large} alt={item.name} />
       <div className={styles.header}>{item.name}</div>
       <div className={styles.properties}>
         <IngredientProperty name="Калории, ккал" value={item.calories} />
@@ -18,8 +18,6 @@ const IngredientDetails = ({ item }) => {
   );
 };
 
-IngredientDetails.propTypes = {
-  item: PropTypes.object.isRequired,
-};
+IngredientDetails.propTypes = {};
 
 export default IngredientDetails;

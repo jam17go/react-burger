@@ -1,25 +1,44 @@
-import PropTypes from "prop-types";
 import { CheckMarkIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./order-details.module.css";
+import { useSelector } from "react-redux";
+import { getOrder, getOrderErrorStatus, getOrderLoadingStatus } from "../../services/order/selectors";
 
-const OrderDetails = ({ orderId }) => {
-  return (
-    <div>
-      <div className={styles.order}>{orderId}</div>
-      <div className={styles.orderDescription}>идентификатор заказа</div>
+const OrderDetails = () => {
+  const loading = useSelector(getOrderLoadingStatus);
+  const error = useSelector(getOrderErrorStatus);
+  const order = useSelector(getOrder);
 
-      <CheckMarkIcon type="primary" />
-
-      <div className={styles.orderStart}>Ваш заказ начали готовить</div>
-      <div className={styles.orderMessage}>
-        Дождитесь готовности на орбитальной станции
+  if (loading) {
+    return (
+      <div>
+        <div className={styles.orderProgress}>Загрузка...</div>
       </div>
-    </div>
-  );
-};
+    );
+  }
 
-OrderDetails.propTypes = {
-  orderId: PropTypes.string.isRequired,
+  if (error) {
+    return (
+      <div>
+        <div className={styles.orderProgress}>Ошибка создания заказа</div>
+      </div>
+    );
+  }
+
+  if (order) {
+    return (
+      <div>
+        <div className={styles.order}>{order.order.number}</div>
+        <div className={styles.orderDescription}>идентификатор заказа</div>
+  
+        <CheckMarkIcon type="primary" />
+  
+        <div className={styles.orderStart}>Ваш заказ начали готовить</div>
+        <div className={styles.orderMessage}>
+          Дождитесь готовности на орбитальной станции
+        </div>
+      </div>
+    );
+  }
 };
 
 export default OrderDetails;

@@ -1,7 +1,12 @@
 import styles from "./app-main.module.css";
 import PropTypes from "prop-types";
+import { useSelector } from "react-redux";
+import { getLoadingStatus, getErrorStatus } from "../../services/burger-ingredients/selectors.js";
 
-function AppMain({ loading, error, children }) {
+function AppMain({ children }) {
+  const loading = useSelector(getLoadingStatus);
+  const error = useSelector(getErrorStatus);
+
   if (loading) {
     return <div className={styles.loading}>Загрузка...</div>;
   }
@@ -14,8 +19,6 @@ function AppMain({ loading, error, children }) {
 }
 
 AppMain.propTypes = {
-  loading: PropTypes.bool.isRequired,
-  error: PropTypes.object,
   children: PropTypes.node.isRequired,
 };
 

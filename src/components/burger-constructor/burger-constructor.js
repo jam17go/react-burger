@@ -1,84 +1,33 @@
 import styles from "./burger-constructor.module.css";
-import {
-  ConstructorElement,
-  Button,
-  CurrencyIcon,
-  DragIcon,
-} from "@ya.praktikum/react-developer-burger-ui-components";
-import { useState } from "react";
-import ModalWindow from "../modal-window/modal-window";
-import OrderDetails from "../order-details/order-details";
-import PropTypes from "prop-types";
-import { ingredientItemPropType } from "../../types/prop-types";
+import { useDispatch } from "react-redux";
+import { addIngredient } from "../../services/burger-constructor/actions";
+import { useDrop } from "react-dnd";
+import { Ingredients } from "./ingredients/ingredients";
+import { Order } from "./order/order";
+import { Buns } from "./buns/buns";
 
-const BurgerConstructor = ({ ingredientsSelected, bunSelected }) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+const BurgerConstructor = () => {
+  const dispatch = useDispatch();
+
+  const [, dropRef] = useDrop({
+    accept: "ingredient",
+    drop(item) {
+      dispatch(addIngredient(item));
+    },
+  });
 
   return (
-    <div className={styles.section}>
+    <div ref={dropRef} className={styles.section}>
       <div className={styles.listContainer}>
-        <div className={styles.bunElement}>
-          <ConstructorElement
-            type="top"
-            isLocked={true}
-            text={bunSelected.name}
-            price={bunSelected.price}
-            thumbnail={bunSelected.image}
-          />
-        </div>
-
-        <div className={styles.list}>
-          {ingredientsSelected.map((ingredient, index) => (
-            <div className={styles.item} key={index}>
-              <DragIcon />
-              <ConstructorElement
-                text={ingredient.name}
-                price={ingredient.price}
-                thumbnail={ingredient.image}
-              />
-            </div>
-          ))}
-        </div>
-
-        <div className={styles.bunElement}>
-          <ConstructorElement
-            type="bottom"
-            isLocked={true}
-            text={bunSelected.name}
-            price={bunSelected.price}
-            thumbnail={bunSelected.image}
-          />
-        </div>
-
-        <div>
-          <div className={styles.buttonBox}>
-            <div className={styles.currency}>
-              610&nbsp;
-              <CurrencyIcon />
-            </div>
-
-            <div onClick={() => setIsModalOpen(true)}>
-              <Button htmlType="button">Оформить заказ</Button>
-            </div>
-
-            <ModalWindow
-              isOpen={isModalOpen}
-              onClose={() => setIsModalOpen(false)}
-            >
-              <OrderDetails orderId="034536"></OrderDetails>
-            </ModalWindow>
-          </div>
-        </div>
+        <Buns>
+          <Ingredients />
+        </Buns>
+        <Order />
       </div>
     </div>
   );
 };
 
-BurgerConstructor.propTypes = {
-  ingredientsSelected: PropTypes.arrayOf(ingredientItemPropType).isRequired,
-  bunSelected: PropTypes.shape({
-    ingredientItemPropType,
-  }).isRequired,
-};
+BurgerConstructor.propTypes = {};
 
 export default BurgerConstructor;

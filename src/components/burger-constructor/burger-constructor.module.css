@@ -14,36 +14,3 @@
   flex-direction: column;
   gap: 10px;
 }
-
-.bunElement {
-  composes: ml-4 from global;
-}
-
-.item {
-  display: flex;
-  align-items: center;
-  width: 100%;
-}
-
-.list {
-  max-height: 60vh;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  margin: 0;
-  text-align: center;
-  list-style-type: none;
-  padding: 0;
-  gap: 10px;
-}
-
-.buttonBox {
-  composes: mt-10 mb-10 from global;
-  display: flex;
-  justify-content: end;
-  align-items: center;
-}
-
-.currency {
-  composes: text text_type_digits-medium mr-10 from global;
-}
