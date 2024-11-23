@@ -4,35 +4,55 @@ import {
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./login-page.module.css";
+import { useDispatch } from "react-redux";
+import { login } from "../services/login/actions";
 
 export function LoginPage() {
+    const dispatch = useDispatch();
+
+    const handleLogin = (event) => {
+        event.preventDefault();
+        dispatch(
+            login(event.target.email.value, event.target.password.value)
+        );
+    }
+
   return (
     <>
       <div className={styles.container}>
         <div className={styles.header}>Вход</div>
-        <EmailInput
-          //onChange={onChange}
-          //value={value}
-          name={"email"}
-          placeholder="Логин"
-          isIcon={true}
-          extraClass="mb-6"
-        />
-        <PasswordInput
-          //onChange={onChange}
-          //value={value}
-          name={"password"}
-          isIcon={true}
-          extraClass="mb-6"
-        />
-        <Button type="primary" size="medium" extraClass="mb-20">
-          Войти
-        </Button>
+        <form id="login-form" onSubmit={handleLogin}>
+          <EmailInput
+            //onChange={onChange}
+            //value={value}
+            name={"email"}
+            placeholder="Логин"
+            isIcon={true}
+            extraClass="mb-6"
+          />
+          <PasswordInput
+            //onChange={onChange}
+            //value={value}
+            name={"password"}
+            isIcon={true}
+            extraClass="mb-6"
+          />
+          <Button type="primary" size="medium" extraClass="mb-20">
+            Войти
+          </Button>
+        </form>
+
         <div className={styles.text}>
-            Вы — новый пользователь? <a href="/register" className={styles.link}>Зарегистрироваться</a>
+          Вы — новый пользователь?{" "}
+          <a href="/register" className={styles.link}>
+            Зарегистрироваться
+          </a>
         </div>
         <div className={styles.text}>
-            Забыли пароль? <a href="/forgot-password" className={styles.link}>Восстановить пароль</a>
+          Забыли пароль?{" "}
+          <a href="/forgot-password" className={styles.link}>
+            Восстановить пароль
+          </a>
         </div>
       </div>
     </>
