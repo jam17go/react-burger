@@ -1,13 +1,19 @@
 import AppHeader from "../app-header/app-header.js";
-import BurgerIngredients from "../burger-ingredients/burger-ingredients.js";
-import BurgerConstructor from "../burger-constructor/burger-constructor.js";
 import styles from "./app.module.css";
-import AppMain from "../app-main/app-main.js";
 import { loadIngredients } from "../../services/burger-ingredients/actions.js";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
+import { HomePage } from "../../pages/home-page.js";
+import { RegisterPage } from "../../pages/register-page.js";
+import { LoginPage } from "../../pages/login-page.js";
+import { ForgotPasswordPage } from "../../pages/forgot-password-page.js";
+import { ResetPasswordPage } from "../../pages/reset-password-page.js";
+import { ProfilePage } from "../../pages/profile-page.js";
+import { IngredientsPage } from "../../pages/ingredients-page.js";
+import { NotFound404Page } from "../../pages/not-found-404-page.js";
+import { Route, Routes } from "react-router-dom";
 
 function App() {
   const dispatch = useDispatch();
@@ -20,12 +26,16 @@ function App() {
     <div className={styles.wrapper}>
       <AppHeader />
       <DndProvider backend={HTML5Backend}>
-        <div className={styles.main}>
-          <AppMain>
-            <BurgerIngredients/>
-            <BurgerConstructor/>
-          </AppMain>
-        </div>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+          <Route path="/reset-password" element={<ResetPasswordPage />} />
+          <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/ingredients/:id" element={<IngredientsPage />} />
+          <Route path="*" element={<NotFound404Page />} />
+        </Routes>
       </DndProvider>
     </div>
   );
