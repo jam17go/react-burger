@@ -16,6 +16,7 @@ import { NotFound404Page } from "../../pages/not-found-404-page.js";
 import { Route, Routes } from "react-router-dom";
 import { useLocation } from "react-router";
 import { OnlyAuth, OnlyUnAuth } from "../protected-route/protected-route.js";
+import { checkUserAuth } from "../../services/user/actions.js";
 
 function App() {
   const dispatch = useDispatch();
@@ -24,6 +25,7 @@ function App() {
   let state = location.state;
 
   useEffect(() => {
+    dispatch(checkUserAuth());
     dispatch(loadIngredients());
   }, []);
 

@@ -5,17 +5,15 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./login-page.module.css";
 import { useDispatch } from "react-redux";
-import { login } from "../services/login/actions";
+import { login } from "../services/user/actions";
 
 export function LoginPage() {
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-    const handleLogin = (event) => {
-        event.preventDefault();
-        dispatch(
-            login(event.target.email.value, event.target.password.value)
-        );
-    }
+  const handleLogin = (event) => {
+    event.preventDefault();
+    dispatch(login(event.target.email.value, event.target.password.value));
+  };
 
   return (
     <>
@@ -23,16 +21,12 @@ export function LoginPage() {
         <div className={styles.header}>Вход</div>
         <form id="login-form" onSubmit={handleLogin}>
           <EmailInput
-            //onChange={onChange}
-            //value={value}
+            type={'email'}
             name={"email"}
             placeholder="Логин"
-            isIcon={true}
             extraClass="mb-6"
           />
           <PasswordInput
-            //onChange={onChange}
-            //value={value}
             name={"password"}
             isIcon={true}
             extraClass="mb-6"

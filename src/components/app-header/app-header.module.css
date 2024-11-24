@@ -12,3 +12,8 @@
   margin: 0 auto;
   position: relative;
 }
+
+.menuItem {
+  text-decoration: none;
+  color: inherit;
+}

@@ -18,7 +18,7 @@ export const Order = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const totalPrice = useSelector(getTotalPrice);
   const ingredients = useSelector(getSelectedIngredients);
-  const user = useSelector((store) => store.loginReducer.user);
+  const user = useSelector((store) => store.user.user);
   const navigate = useNavigate();
   
   const dispatch = useDispatch();

@@ -5,15 +5,18 @@ import {
 import styles from "./login-page.module.css";
 import { useDispatch } from "react-redux";
 import { passwordResetReset } from "../services/password-reset/actions";
+import { useNavigate } from "react-router-dom";
 
 export function ResetPasswordPage() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleResetPassword = (event) => {
     event.preventDefault();
     dispatch(
       passwordResetReset(event.target.password.value, event.target.code.value)
     );
+    navigate("/login");
   };
 
   return (

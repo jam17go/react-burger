@@ -14,7 +14,7 @@ const AppHeader = () => {
     <div className={styles.header}>
       <div className={styles.menu}>
         <NavSection>
-          <NavLink to="/">
+          <NavLink to="/" className={styles.menuItem}>
             <NavItem icon={<BurgerIcon />} text="Конструктор" />
           </NavLink>
           <NavItem icon={<ListIcon />} text="Лента заказов" />
@@ -23,7 +23,7 @@ const AppHeader = () => {
         <LogoContainer />
 
         <NavSection>
-          <NavLink to="/profile">
+          <NavLink to="/profile" className={styles.menuItem}>
             <NavItem icon={<ProfileIcon />} text="Личный кабинет" />
           </NavLink>
         </NavSection>

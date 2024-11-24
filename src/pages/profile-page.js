@@ -6,25 +6,22 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./login-page.module.css";
 import { useDispatch } from "react-redux";
-import { getUser, updateUser } from "../services/profile/actions";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { selectUser } from "../services/profile/selectors";
 import { useState } from "react";
+import { updateUser } from "../services/profile/actions";
+import { logout } from "../services/user/actions";
+import { NavLink } from "react-router-dom";
 
 export function ProfilePage() {
   const dispatch = useDispatch();
-  const user = useSelector(selectUser);
+  const user = useSelector((store) => store.user.user);
 
   const [usernameValue, setUsernameValue] = useState(user.name)
   const [emailValue, setEmailValue] = useState(user.email)
   const [passwordValue, setPasswordValue] = useState()
 
   console.log(user);
-
-  useEffect(() => {
-    dispatch(getUser());
-  }, []);
 
   useEffect(() => {
     setUsernameValue(user.name)
@@ -37,6 +34,10 @@ export function ProfilePage() {
     dispatch(updateUser(usernameValue, emailValue, passwordValue));
   }
 
+  const handleLogout = () => {
+    dispatch(logout());
+  }
+
   return (
     <>
       <div className={styles.parent}>
@@ -44,7 +45,9 @@ export function ProfilePage() {
           <div className={styles.menu}>
             <div>Профиль</div>
             <div>История заказов</div>
-            <div>Выход</div>
+            <NavLink to='/' onClick={handleLogout} className={styles.menuItem}>
+              <div>Выход</div>
+            </NavLink >
             <div className={styles.menuInactive}>
               В этом разделе вы можете изменить свои персональные данные
             </div>

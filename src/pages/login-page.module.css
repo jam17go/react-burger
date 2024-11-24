@@ -48,6 +48,12 @@
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* Optional for better styling */
   max-width: 400px; /* Optional for better styling */
   min-width: 400px; /* Optional for better styling */
+
+}
+
+.menuItem {
+    text-decoration: none; /* Prevents underline on visited or hover state */
+    color: inherit; /* Keeps text color consistent */
 }
 
 .menuInactive {

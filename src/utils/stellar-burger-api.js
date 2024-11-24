@@ -105,7 +105,7 @@ export const registerRequest = (email, password, name) => {
   }).then(getResponse);
 };
 
-export const loginRequest = (email, password) => {
+export const loginRequest = async (email, password) => {
   return fetchWithRefresh(ENDPOINTS.LOGIN, {
     method: "POST",
     headers: {
