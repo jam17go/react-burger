@@ -12,11 +12,11 @@ import { ForgotPasswordPage } from "../../pages/forgot-password-page.js";
 import { ResetPasswordPage } from "../../pages/reset-password-page.js";
 import { ProfilePage } from "../../pages/profile-page.js";
 import { IngredientsPage } from "../../pages/ingredients-page.js";
-import { NotFound404Page } from "../../pages/not-found-404-page.js";
 import { Route, Routes } from "react-router-dom";
 import { useLocation } from "react-router";
 import { OnlyAuth, OnlyUnAuth } from "../protected-route/protected-route.js";
 import { checkUserAuth } from "../../services/user/actions.js";
+import { Error } from "../error/error.js";
 
 function App() {
   const dispatch = useDispatch();
@@ -41,7 +41,7 @@ function App() {
           <Route path="/reset-password" element={<OnlyUnAuth component={<ResetPasswordPage />} /> } />
           <Route path="/profile" element={<OnlyAuth component={<ProfilePage />} /> } />
           <Route path="/ingredients/:id" element={<IngredientsPage />} />
-          <Route path="*" element={<NotFound404Page />} />
+          <Route path="*" element={<Error errorText={'Ошибка 404 - страница не найдена'} />} />
         </Routes>
       </DndProvider>
     </div>
