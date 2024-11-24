@@ -14,9 +14,13 @@ import { ProfilePage } from "../../pages/profile-page.js";
 import { IngredientsPage } from "../../pages/ingredients-page.js";
 import { NotFound404Page } from "../../pages/not-found-404-page.js";
 import { Route, Routes } from "react-router-dom";
+import { useLocation } from "react-router";
 
 function App() {
   const dispatch = useDispatch();
+  
+  let location = useLocation();
+  let state = location.state;
 
   useEffect(() => {
     dispatch(loadIngredients());
@@ -26,7 +30,7 @@ function App() {
     <div className={styles.wrapper}>
       <AppHeader />
       <DndProvider backend={HTML5Backend}>
-        <Routes>
+        <Routes location={state?.backgroundLocation || location}>
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />

@@ -12,11 +12,15 @@ import { getItemCount } from "../../../services/burger-constructor/selectors";
 import { useDrag } from "react-dnd";
 import { setCurrentIngredient } from "../../../services/ingredient-details/actions";
 import { useDispatch } from "react-redux";
+import { NavLink } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const IngredientItem = ({ item }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const itemCount = useSelector((state) => getItemCount(state, item));
   const dispatch = useDispatch();
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const [, dragRef] = useDrag({
     type: "ingredient",
@@ -31,13 +35,18 @@ const IngredientItem = ({ item }) => {
 
   const onCloseHandler = () => {
     setIsModalOpen(false);
-
     dispatch(setCurrentIngredient(null));
+    navigate(-1);
   };
 
   return (
     <div ref={dragRef}>
-      <div className={styles.ingredientItem} onClick={onClickHandler}>
+      <NavLink
+        to={`/ingredients/${item._id}`}
+        state={{ backgroundLocation: location }}
+        onClick={onClickHandler}
+        className={styles.ingredientItem}
+      >
         {itemCount > 0 && <Counter count={itemCount} />}
 
         <img src={item.image} alt={item.name} />
@@ -48,7 +57,7 @@ const IngredientItem = ({ item }) => {
         </div>
 
         <div className={styles.name}>{item.name}</div>
-      </div>
+      </NavLink>
 
       <ModalWindow isOpen={isModalOpen} onClose={onCloseHandler}>
         <IngredientDetails item={item} />
