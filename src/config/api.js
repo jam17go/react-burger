@@ -9,4 +9,5 @@ export const ENDPOINTS = {
   LOGIN: `${BASE_API_URL}/auth/login`,
   REFRESH_TOKEN: `${BASE_API_URL}/auth/token`,
   LOGOUT: `${BASE_API_URL}/auth/logout`,
+  USER: `${BASE_API_URL}/auth/user`,
 };

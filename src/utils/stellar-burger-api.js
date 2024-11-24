@@ -17,26 +17,24 @@ const checkReponse = (res) => {
 };
 
 export const refreshToken = () => {
-  return (
-    fetch(ENDPOINTS.REFRESH_TOKEN, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json;charset=utf-8",
-      },
-      body: JSON.stringify({
-        token: localStorage.getItem("refreshToken"),
-      }),
-    })
-      .then(checkReponse)
-      .then((refreshData) => {
-        if (!refreshData.success) {
-          return Promise.reject(refreshData);
-        }
-        localStorage.setItem("refreshToken", refreshData.refreshToken);
-        localStorage.setItem("accessToken", refreshData.accessToken);
-        return refreshData;
-      })
-  );
+  return fetch(ENDPOINTS.REFRESH_TOKEN, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json;charset=utf-8",
+    },
+    body: JSON.stringify({
+      token: localStorage.getItem("refreshToken"),
+    }),
+  })
+    .then(checkReponse)
+    .then((refreshData) => {
+      if (!refreshData.success) {
+        return Promise.reject(refreshData);
+      }
+      localStorage.setItem("refreshToken", refreshData.refreshToken);
+      localStorage.setItem("accessToken", refreshData.accessToken);
+      return refreshData;
+    });
 };
 
 export const fetchWithRefresh = async (url, options) => {
@@ -54,17 +52,18 @@ export const fetchWithRefresh = async (url, options) => {
     }
   }
 };
+
 export const postOrder = (ingredients) => {
   return fetchWithRefresh(ENDPOINTS.ORDERS, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "Authorization": localStorage.getItem("accessToken"),
+      Authorization: localStorage.getItem("accessToken"),
     },
     body: JSON.stringify({
-      ingredients: ingredients
+      ingredients: ingredients,
     }),
-  })
+  });
 };
 
 export const passwordResetRequest = (email) => {
@@ -116,15 +115,14 @@ export const loginRequest = (email, password) => {
       email: email,
       password: password,
     }),
-  })
-  .then((refreshData) => {
+  }).then((refreshData) => {
     if (!refreshData.success) {
       return Promise.reject(refreshData);
     }
     localStorage.setItem("refreshToken", refreshData.refreshToken);
     localStorage.setItem("accessToken", refreshData.accessToken);
     return refreshData;
-  })
+  });
 };
 
 export const logoutRequest = () => {
@@ -140,5 +138,36 @@ export const logoutRequest = () => {
     localStorage.removeItem("refreshToken");
     localStorage.removeItem("accessToken");
     return res;
+  });
+};
+
+export const getUserRequest = async () => {
+  try {
+    return await fetchWithRefresh(ENDPOINTS.USER, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: localStorage.getItem("accessToken"),
+      },
+    });
+  } catch (err) {
+    localStorage.removeItem("refreshToken");
+    localStorage.removeItem("accessToken");
+    throw err;
+  }
+};
+
+export const updateUserInfoRequest = (name, email, password) => {
+  return fetchWithRefresh(ENDPOINTS.USER, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: localStorage.getItem("accessToken"),
+    },
+    body: JSON.stringify({
+      email: email,
+      name: name,
+      password: password,
+    }),
   });
 };
