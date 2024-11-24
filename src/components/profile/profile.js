@@ -11,6 +11,7 @@ import { useState } from "react";
 import { updateUser } from "../../services/profile/actions";
 import { logout } from "../../services/user/actions";
 import { NavLink } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 
 export function Profile() {
   const dispatch = useDispatch();
@@ -40,9 +41,13 @@ export function Profile() {
       <div className={styles.parent}>
         <div className={styles.left}>
           <div className={styles.menu}>
-            <div>Профиль</div>
-            <div>История заказов</div>
-            <NavLink to="/" onClick={handleLogout} className={styles.menuItem}>
+            <NavLink to="profile-tab" className={styles.menuItem}>
+              <div>Профиль</div>
+            </NavLink>
+            <NavLink to="order-history-tab" className={styles.menuItem}>
+              <div>История заказов</div>
+            </NavLink>
+            <NavLink to="/login" onClick={handleLogout} className={styles.menuItem}>
               <div>Выход</div>
             </NavLink>
             <div className={styles.menuInactive}>
@@ -52,37 +57,9 @@ export function Profile() {
         </div>
 
         <div className={styles.center} onSubmit={handleSubmit}>
-          <form id="register-form">
-            <Input
-              type={"text"}
-              name={"name"}
-              placeholder="Имя"
-              isIcon={true}
-              extraClass="mb-6"
-              value={usernameValue}
-              onChange={(e) => setUsernameValue(e.target.value)}
-            />
-            <Input
-              type={"email"}
-              name={"login"}
-              placeholder="Логин"
-              isIcon={true}
-              extraClass="mb-6"
-              value={emailValue}
-              onChange={(e) => setEmailValue(e.target.value)}
-            />
-            <PasswordInput
-              name={"password"}
-              isIcon={true}
-              extraClass="mb-6"
-              value={passwordValue}
-              onChange={(e) => setPasswordValue(e.target.value)}
-            />
-            <Button type="submit" size="medium" extraClass="mb-20">
-              Сохранить
-            </Button>
-          </form>
+          <Outlet />
         </div>
+
         <div className={styles.right}></div>
       </div>
     </>
