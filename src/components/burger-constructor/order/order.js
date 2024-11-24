@@ -12,18 +12,24 @@ import { getSelectedIngredients } from "../../../services/burger-constructor/sel
 import { placeOrder } from "../../../services/order/actions";
 import { cleanupConstructorState } from "../../../services/burger-constructor/actions";
 import { resetOrder } from "../../../services/order/actions";
+import { useNavigate } from "react-router";
 
 export const Order = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const totalPrice = useSelector(getTotalPrice);
   const ingredients = useSelector(getSelectedIngredients);
+  const user = useSelector((store) => store.loginReducer.user);
+  const navigate = useNavigate();
   
   const dispatch = useDispatch();
 
   const onOpenOrder = () => {
-    setIsModalOpen(true);
-
-    dispatch(placeOrder(ingredients));
+    if (!user) {
+      navigate("/login", { state: { from: "/" } });
+    } else {
+      setIsModalOpen(true);
+      dispatch(placeOrder(ingredients));
+    }
   };
 
   const onCloseOrder = () => {

@@ -15,10 +15,11 @@ import { IngredientsPage } from "../../pages/ingredients-page.js";
 import { NotFound404Page } from "../../pages/not-found-404-page.js";
 import { Route, Routes } from "react-router-dom";
 import { useLocation } from "react-router";
+import { OnlyAuth, OnlyUnAuth } from "../protected-route/protected-route.js";
 
 function App() {
   const dispatch = useDispatch();
-  
+
   let location = useLocation();
   let state = location.state;
 
@@ -32,11 +33,11 @@ function App() {
       <DndProvider backend={HTML5Backend}>
         <Routes location={state?.backgroundLocation || location}>
           <Route path="/" element={<HomePage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/register" element={<RegisterPage />} />
-          <Route path="/forgot-password" element={<ForgotPasswordPage />} />
-          <Route path="/reset-password" element={<ResetPasswordPage />} />
-          <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/login" element={<OnlyUnAuth component={<LoginPage />} />} />
+          <Route path="/register" element={<OnlyUnAuth component={<RegisterPage />} /> } />
+          <Route path="/forgot-password" element={<OnlyUnAuth component={<ForgotPasswordPage />} /> } />
+          <Route path="/reset-password" element={<OnlyUnAuth component={<ResetPasswordPage />} /> } />
+          <Route path="/profile" element={<OnlyAuth component={<ProfilePage />} /> } />
           <Route path="/ingredients/:id" element={<IngredientsPage />} />
           <Route path="*" element={<NotFound404Page />} />
         </Routes>
