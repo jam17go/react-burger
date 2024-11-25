@@ -14,8 +14,6 @@ export function Login() {
   const [password, setPassword] = React.useState("");
   const error = useSelector((store) => store.user.loginError);
 
-  console.log(error);
-
   const handleLogin = (event) => {
     event.preventDefault();
     dispatch(login(email, password));

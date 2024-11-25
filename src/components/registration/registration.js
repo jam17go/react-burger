@@ -7,8 +7,10 @@ import {
   import { useDispatch } from "react-redux";
   import { register } from "../../services/registration/actions";
   import { NavLink } from "react-router-dom";
+  import { useNavigate } from "react-router-dom";
 
   export function Registration() {
+    const navigate = useNavigate();
     const dispatch = useDispatch();
   
     const handleRegister = (event) => {
@@ -16,6 +18,7 @@ import {
       dispatch(
         register(event.target.email.value, event.target.password.value, event.target.name.value)
       );
+      navigate("/login");
     }
   
     return (
