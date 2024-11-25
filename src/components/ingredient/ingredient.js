@@ -5,16 +5,20 @@ import IngredientDetails from "../../components/ingredient-details/ingredient-de
 import styles from "./ingredient.module.css";
 
 export function Ingredient() {
-  const params = useParams();
+  const { id } = useParams();
   const ingredientGroups = useSelector(getIngredientGroupsData);
+
+  const selectedIngredient = ingredientGroups
+    .flatMap((group) => group.ingredients)
+    .find((ingredient) => ingredient._id === id);
 
   return (
     <div className={styles.container}>
-      {ingredientGroups.map((group) => (
-        group.ingredients.map((ingredient) => (
-          ingredient._id === params.id && <IngredientDetails item={ingredient} />
-        ))
-      ))}
+      {selectedIngredient ? (
+        <IngredientDetails item={selectedIngredient} />
+      ) : (
+        <p>Ingredient not found.</p>
+      )}
     </div>
-  )
+  );
 }

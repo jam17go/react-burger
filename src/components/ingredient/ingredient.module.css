@@ -1,5 +1,4 @@
 .container {
-  composes: mt-30 from global;
   display: flex;
   justify-content: center;
   align-items: center;

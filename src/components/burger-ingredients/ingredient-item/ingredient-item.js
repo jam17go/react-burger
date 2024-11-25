@@ -27,24 +27,11 @@ const IngredientItem = ({ item }) => {
     item: item,
   });
 
-  const onClickHandler = () => {
-    setIsModalOpen(true);
-
-    dispatch(setCurrentIngredient(item));
-  };
-
-  const onCloseHandler = () => {
-    setIsModalOpen(false);
-    dispatch(setCurrentIngredient(null));
-    navigate(-1);
-  };
-
   return (
     <div ref={dragRef}>
       <NavLink
         to={`/ingredients/${item._id}`}
         state={{ backgroundLocation: location }}
-        onClick={onClickHandler}
         className={styles.ingredientItem}
       >
         {itemCount > 0 && <Counter count={itemCount} />}
@@ -58,10 +45,6 @@ const IngredientItem = ({ item }) => {
 
         <div className={styles.name}>{item.name}</div>
       </NavLink>
-
-      <ModalWindow isOpen={isModalOpen} onClose={onCloseHandler}>
-        <IngredientDetails item={item} />
-      </ModalWindow>
     </div>
   );
 };

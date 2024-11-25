@@ -19,6 +19,7 @@ import { checkUserAuth } from "../../services/user/actions.js";
 import { Error } from "../error/error.js";
 import { ProfileTab } from "../profile/profile-tab.js";
 import { OrderHistoryTab } from "../profile/order-history-tab.js";
+import { IngredientModal } from "../burger-ingredients/ingredient-modal/ingredient-modal.js";
 
 function App() {
   const dispatch = useDispatch();
@@ -37,18 +38,42 @@ function App() {
       <DndProvider backend={HTML5Backend}>
         <Routes location={state?.backgroundLocation || location}>
           <Route path="/" element={<HomePage />} />
-          <Route path="/login" element={<OnlyUnAuth component={<LoginPage />} />} />
-          <Route path="/register" element={<OnlyUnAuth component={<RegisterPage />} /> } />
-          <Route path="/forgot-password" element={<OnlyUnAuth component={<ForgotPasswordPage />} /> } />
-          <Route path="/reset-password" element={<OnlyUnAuth component={<ResetPasswordPage />} /> } />
-          <Route path="/profile" element={<OnlyAuth component={<ProfilePage />} /> }>
+          <Route
+            path="/login"
+            element={<OnlyUnAuth component={<LoginPage />} />}
+          />
+          <Route
+            path="/register"
+            element={<OnlyUnAuth component={<RegisterPage />} />}
+          />
+          <Route
+            path="/forgot-password"
+            element={<OnlyUnAuth component={<ForgotPasswordPage />} />}
+          />
+          <Route
+            path="/reset-password"
+            element={<OnlyUnAuth component={<ResetPasswordPage />} />}
+          />
+          <Route
+            path="/profile"
+            element={<OnlyAuth component={<ProfilePage />} />}
+          >
             <Route index element={<ProfileTab />} />
             <Route path="profile-tab" element={<ProfileTab />} />
             <Route path="order-history-tab" element={<OrderHistoryTab />} />
           </Route>
           <Route path="/ingredients/:id" element={<IngredientsPage />} />
-          <Route path="*" element={<Error errorText={'Ошибка 404 - страница не найдена'} />} />
+          <Route
+            path="*"
+            element={<Error errorText={"Ошибка 404 - страница не найдена"} />}
+          />
         </Routes>
+
+        {state?.backgroundLocation && (
+          <Routes>
+            <Route path="/ingredients/:id" element={<IngredientModal />} />
+          </Routes>
+        )}
       </DndProvider>
     </div>
   );
