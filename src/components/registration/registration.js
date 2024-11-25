@@ -42,7 +42,7 @@ import {
               isIcon={true}
               extraClass="mb-6"
             />
-            <Button type="submit" size="medium" extraClass="mb-20">
+            <Button htmlType="submit" type="primary" size="medium" extraClass="mb-20">
               Зарегистрироваться
             </Button>
           </form>

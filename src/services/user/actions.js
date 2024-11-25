@@ -6,6 +6,7 @@ import {
 
 export const SET_AUTH_CHECKED = "SET_AUTH_CHECKED";
 export const SET_USER = "SET_USER";
+export const SET_LOGIN_ERROR = "SET_LOGIN_ERROR";
 
 export const setAuthChecked = (value) => ({
   type: SET_AUTH_CHECKED,
@@ -19,10 +20,22 @@ export const setUser = (user) => ({
 
 export const login = (email, password) => {
   return async (dispatch) => {
-    return loginRequest(email, password).then((res) => {
-      dispatch(setUser(res.user));
-      dispatch(setAuthChecked(true));
-    });
+    return loginRequest(email, password)
+      .then((res) => {
+        dispatch(setUser(res.user));
+        dispatch(setAuthChecked(true));
+        dispatch({
+            type: SET_LOGIN_ERROR,
+            payload: null,
+          });
+      })
+      .catch((err) => {
+        dispatch({
+          type: SET_LOGIN_ERROR,
+          payload: err.message,
+        });
+        dispatch(setAuthChecked(true));
+      });
   };
 };
 

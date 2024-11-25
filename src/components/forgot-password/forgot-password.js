@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 import { passwordReset } from "../../services/password-reset/actions";
 import { useNavigate } from "react-router-dom";
 import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export function ForgotPassword() {
   const dispatch = useDispatch();
@@ -15,22 +16,24 @@ export function ForgotPassword() {
   const handleResetPassword = (event) => {
     event.preventDefault();
     dispatch(passwordReset(event.target.email.value));
-    navigate('/reset-password');
+    navigate("/reset-password");
   };
 
   return (
     <>
       <div className={styles.container}>
         <div className={styles.header}>Восстановление пароля</div>
+
         <form id="forgot-password-form" onSubmit={handleResetPassword}>
           <Input
-            type='email'
+            type="email"
             name={"email"}
             placeholder="Логин"
             extraClass="mb-6"
           />
           <Button
-            type="submit"
+            htmlType="submit"
+            type="primary"
             size="medium"
             extraClass="mb-20"
           >
@@ -40,7 +43,9 @@ export function ForgotPassword() {
 
         <div className={styles.text}>
           Вспомнили пароль?{" "}
-          <NavLink to='/login' className={styles.link}>Войти</NavLink>
+          <NavLink to="/login" className={styles.link}>
+            Войти
+          </NavLink>
         </div>
       </div>
     </>

@@ -2,6 +2,7 @@ import {
   PASSWORD_RESET_PENDING,
   PASSWORD_RESET_SUCCESS,
   PASSWORD_RESET_ERROR,
+  PASSWORD_RESET_FLAG,
   PASSWORD_RESET_RESET_SUCCESS,
   PASSWORD_RESET_RESET_PENDING,
   PASSWORD_RESET_RESET_ERROR,
@@ -11,6 +12,7 @@ export const initialState = {
   loading: false,
   success: false,
   error: false,
+  passwordResetFlag: false,
 };
 
 export const reducer = (state = initialState, action) => {
@@ -35,6 +37,11 @@ export const reducer = (state = initialState, action) => {
         loading: false,
         success: false,
         error: true,
+      };
+    case PASSWORD_RESET_FLAG:
+      return {
+        ...state,
+        passwordResetFlag: true,
       };
     case PASSWORD_RESET_RESET_PENDING:
       return {

@@ -1,36 +1,13 @@
-import {
-  PasswordInput,
-  Button,
-  Input,
-} from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./profile.module.css";
 import { useDispatch } from "react-redux";
-import { useEffect } from "react";
-import { useSelector } from "react-redux";
-import { useState } from "react";
-import { updateUser } from "../../services/profile/actions";
 import { logout } from "../../services/user/actions";
 import { NavLink } from "react-router-dom";
 import { Outlet } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 export function Profile() {
   const dispatch = useDispatch();
-  const user = useSelector((store) => store.user.user);
-
-  const [usernameValue, setUsernameValue] = useState(user.name);
-  const [emailValue, setEmailValue] = useState(user.email);
-  const [passwordValue, setPasswordValue] = useState();
-
-  useEffect(() => {
-    setUsernameValue(user.name);
-    setPasswordValue(user.password);
-    setEmailValue(user.email);
-  }, [user]);
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    dispatch(updateUser(usernameValue, emailValue, passwordValue));
-  };
+  const location = useLocation();
 
   const handleLogout = () => {
     dispatch(logout());
@@ -41,13 +18,30 @@ export function Profile() {
       <div className={styles.parent}>
         <div className={styles.left}>
           <div className={styles.menu}>
-            <NavLink to="profile-tab" className={styles.menuItem}>
+            <NavLink
+              to="profile-tab"
+              className={({ isActive }) => {
+                const isDefaultActive = location.pathname === "/profile";
+                return isActive || isDefaultActive
+                  ? styles.menuItemActive
+                  : styles.menuItem;
+              }}
+            >
               <div>Профиль</div>
             </NavLink>
-            <NavLink to="order-history-tab" className={styles.menuItem}>
+            <NavLink
+              to="order-history-tab"
+              className={({ isActive }) =>
+                isActive ? styles.menuItemActive : styles.menuItem
+              }
+            >
               <div>История заказов</div>
             </NavLink>
-            <NavLink to="/login" onClick={handleLogout} className={styles.menuItem}>
+            <NavLink
+              to="/login"
+              onClick={handleLogout}
+              className={styles.menuItem}
+            >
               <div>Выход</div>
             </NavLink>
             <div className={styles.menuInactive}>
@@ -56,7 +50,7 @@ export function Profile() {
           </div>
         </div>
 
-        <div className={styles.center} onSubmit={handleSubmit}>
+        <div className={styles.center}>
           <Outlet />
         </div>
 

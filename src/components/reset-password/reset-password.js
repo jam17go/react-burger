@@ -5,12 +5,18 @@ import {
 import styles from "./reset-password.module.css";
 import { useDispatch } from "react-redux";
 import { passwordResetReset } from "../../services/password-reset/actions";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export function ResetPassword() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const passwordResetFlag = useSelector(
+    (store) => store.authenticationReducer.passwordResetFlag
+  );
+
+  console.log(passwordResetFlag)
 
   const handleResetPassword = (event) => {
     event.preventDefault();
@@ -19,6 +25,10 @@ export function ResetPassword() {
     );
     navigate("/login");
   };
+
+  if (passwordResetFlag === false) {
+    return <Navigate to="/forgot-password" />;
+  }
 
   return (
     <>
@@ -37,7 +47,12 @@ export function ResetPassword() {
             isIcon={true}
             extraClass="mb-6"
           />
-          <Button type="submit" size="medium" extraClass="mb-20">
+          <Button
+            htmlType="submit"
+            type="primary"
+            size="medium"
+            extraClass="mb-20"
+          >
             Сохранить
           </Button>
         </form>

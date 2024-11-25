@@ -6,7 +6,6 @@
 }
 
 .navText {
-  composes: ml-2 text text_type_main-default from global;
-  color: #f2f2f3;
+  composes: ml-2 from global;
   font-size: 16px;
 }

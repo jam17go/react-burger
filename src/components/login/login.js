@@ -1,51 +1,71 @@
 import {
-  EmailInput,
-  PasswordInput,
+  Input,
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./login.module.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../services/user/actions";
 import { NavLink } from "react-router-dom";
+import React from "react";
 
 export function Login() {
   const dispatch = useDispatch();
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
+  const error = useSelector((store) => store.user.loginError);
+
+  console.log(error);
 
   const handleLogin = (event) => {
     event.preventDefault();
-    dispatch(login(event.target.email.value, event.target.password.value));
+    dispatch(login(email, password));
   };
 
   return (
-    <>
-      <div className={styles.container}>
-        <div className={styles.header}>Вход</div>
-        <form id="login-form" onSubmit={handleLogin}>
-          <EmailInput
-            type={"email"}
-            name={"email"}
-            placeholder="Логин"
-            extraClass="mb-6"
-          />
-          <PasswordInput name={"password"} isIcon={true} extraClass="mb-6" />
-          <Button type="primary" size="medium" extraClass="mb-20">
-            Войти
-          </Button>
-        </form>
+    <div className={styles.container}>
+      <div className={styles.header}>Вход</div>
+      
+      {error && <div className={styles.error}>{error}</div>}
 
-        <div className={styles.text}>
-          Вы — новый пользователь?{" "}
-          <NavLink to="/register" className={styles.link}>
-            Зарегистрироваться
-          </NavLink>
-        </div>
-        <div className={styles.text}>
-          Забыли пароль?{" "}
-          <NavLink to="/forgot-password" className={styles.link}>
-            Восстановить пароль
-          </NavLink>
-        </div>
+      <form id="login-form" onSubmit={handleLogin}>
+        <Input
+          type="email"
+          name="email"
+          placeholder="Логин"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          extraClass="mb-6"
+        />
+        <Input
+          type="password"
+          name="password"
+          placeholder="Пароль"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          extraClass="mb-6"
+        />
+        <Button
+          htmlType="submit"
+          type="primary"
+          size="medium"
+          extraClass="mb-20"
+        >
+          Войти
+        </Button>
+      </form>
+
+      <div className={styles.text}>
+        Вы — новый пользователь?{" "}
+        <NavLink to="/register" className={styles.link}>
+          Зарегистрироваться
+        </NavLink>
       </div>
-    </>
+      <div className={styles.text}>
+        Забыли пароль?{" "}
+        <NavLink to="/forgot-password" className={styles.link}>
+          Восстановить пароль
+        </NavLink>
+      </div>
+    </div>
   );
 }

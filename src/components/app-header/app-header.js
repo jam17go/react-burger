@@ -14,16 +14,18 @@ const AppHeader = () => {
     <div className={styles.header}>
       <div className={styles.menu}>
         <NavSection>
-          <NavLink to="/" className={styles.menuItem}>
+          <NavLink to="/" className={({isActive}) => isActive ? styles.menuItemActive : styles.menuItem}>
             <NavItem icon={<BurgerIcon />} text="Конструктор" />
           </NavLink>
-          <NavItem icon={<ListIcon />} text="Лента заказов" />
+          <NavLink to="/orders" className={({isActive}) => isActive ? styles.menuItemActive : styles.menuItem}>
+            <NavItem icon={<ListIcon />} text="Лента заказов" />
+          </NavLink>
         </NavSection>
 
         <LogoContainer />
 
         <NavSection>
-          <NavLink to="/profile" className={styles.menuItem}>
+          <NavLink to="/profile" className={({isActive}) => isActive ? styles.menuItemActive : styles.menuItem}>
             <NavItem icon={<ProfileIcon />} text="Личный кабинет" />
           </NavLink>
         </NavSection>

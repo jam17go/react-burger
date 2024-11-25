@@ -26,7 +26,7 @@
 }
 
 .parent {
-    composes: mt-20 from global;
+  composes: mt-20 from global;
   display: flex;
 }
 
@@ -39,7 +39,6 @@
 }
 
 .menu {
-  composes: text text_type_main-medium from global;
   display: flex;
   flex-direction: column;
   align-items: flex-start; /* Aligns the elements inside the div to the left */
@@ -48,19 +47,25 @@
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* Optional for better styling */
   max-width: 400px; /* Optional for better styling */
   min-width: 400px; /* Optional for better styling */
-
 }
 
 .menuItem {
-    text-decoration: none; /* Prevents underline on visited or hover state */
-    color: inherit; /* Keeps text color consistent */
+  composes: text text_type_main-medium text_color_inactive from global;
+  text-decoration: none;
 }
 
+.menuItemActive {
+  composes: text text_type_main-medium from global;
+  text-decoration: none;
+  color: inherit;
+}
+
+
 .menuInactive {
-    composes: mt-20 text text_type_main-default text_color_inactive from global;
-    display: flex; /* Ensure it's treated as a flex container */
-    flex-direction: column; /* Optional: for vertical alignment of child elements */
-    text-align: left; /* Align text to the left */
-    align-items: flex-start; /* Align flex items to the left */
-    justify-content: flex-start; /* Align content to the top-left */
-  }
+  composes: mt-20 text text_type_main-default text_color_inactive from global;
+  display: flex; /* Ensure it's treated as a flex container */
+  flex-direction: column; /* Optional: for vertical alignment of child elements */
+  text-align: left; /* Align text to the left */
+  align-items: flex-start; /* Align flex items to the left */
+  justify-content: flex-start; /* Align content to the top-left */
+}
