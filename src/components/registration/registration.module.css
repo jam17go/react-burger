@@ -1,0 +1,66 @@
+.container {
+  composes: mt-30 from global;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.header {
+  composes: mt-10 mb-6 text text_type_main-medium from global;
+}
+
+.button {
+  composes: mt-20 from global;
+}
+
+.link {
+  composes: mt-20 text text_type_main-default from global;
+  color: #4c4cff;
+  text-decoration: none;
+}
+
+.text {
+  composes: mt-4 text text_type_main-default from global;
+  color: #8585ad;
+}
+
+.parent {
+    composes: mt-20 from global;
+  display: flex;
+}
+
+.left,
+.right {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end; /* Ensures the inner div is pushed to the right */
+  align-items: flex-start; /* Aligns the div itself to the top */
+}
+
+.menu {
+  composes: text text_type_main-medium from global;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Aligns the elements inside the div to the left */
+  gap: 10px;
+  padding: 10px; /* Optional for spacing */
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* Optional for better styling */
+  max-width: 400px; /* Optional for better styling */
+  min-width: 400px; /* Optional for better styling */
+
+}
+
+.menuItem {
+    text-decoration: none; /* Prevents underline on visited or hover state */
+    color: inherit; /* Keeps text color consistent */
+}
+
+.menuInactive {
+    composes: mt-20 text text_type_main-default text_color_inactive from global;
+    display: flex; /* Ensure it's treated as a flex container */
+    flex-direction: column; /* Optional: for vertical alignment of child elements */
+    text-align: left; /* Align text to the left */
+    align-items: flex-start; /* Align flex items to the left */
+    justify-content: flex-start; /* Align content to the top-left */
+  }
