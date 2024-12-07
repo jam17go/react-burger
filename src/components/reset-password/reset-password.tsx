@@ -8,27 +8,43 @@ import { passwordResetReset } from "../../services/password-reset/actions";
 import { Navigate, useNavigate } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { FormEvent, useState } from "react";
 
-export function ResetPassword() {
+export function ResetPassword(): JSX.Element {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [passwordInput, setPasswordInput] = useState("");
+  const [codeInput, setCodeInput] = useState("");
+
+  const handlePasswordInput = (event: FormEvent<HTMLInputElement>): void => {
+    setPasswordInput((event.target as HTMLInputElement).value);
+  }
+
+  const handleCodeInput = (event: FormEvent<HTMLInputElement>): void => {
+    setCodeInput((event.target as HTMLInputElement).value);
+  }
+
   const passwordResetFlag = useSelector(
+    // @ts-ignore
     (store) => store.authenticationReducer.passwordResetFlag
   );
-
-  console.log(passwordResetFlag)
-
-  const handleResetPassword = (event) => {
-    event.preventDefault();
-    dispatch(
-      passwordResetReset(event.target.password.value, event.target.code.value)
-    );
-    navigate("/login");
-  };
 
   if (passwordResetFlag === false) {
     return <Navigate to="/forgot-password" />;
   }
+
+  const handleResetPassword = (event: FormEvent<HTMLFormElement>): void => {
+    event.preventDefault();
+
+    const formData = new FormData(event.currentTarget);
+
+    const password = formData.get("password");
+    const code = formData.get("code");
+
+    // @ts-ignore
+    dispatch(passwordResetReset(password, code));
+    navigate("/login");
+  };
 
   return (
     <>
@@ -40,12 +56,15 @@ export function ResetPassword() {
             name={"password"}
             extraClass="mb-6"
             placeholder="Введите новый пароль"
+            value={passwordInput}
+            onChange={handlePasswordInput}
           />
           <Input
             placeholder="Введите код из письма"
             name={"code"}
-            isIcon={true}
             extraClass="mb-6"
+            value={codeInput}
+            onChange={handleCodeInput}
           />
           <Button
             htmlType="submit"
