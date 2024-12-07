@@ -1,15 +1,16 @@
 import { useParams } from "react-router";
 import { useSelector } from "react-redux";
-import { getIngredientGroupsData } from "../../services/burger-ingredients/selectors.js";
-import IngredientDetails from "../../components/ingredient-details/ingredient-details.js";
+import { getIngredientGroupsData } from "../../services/burger-ingredients/selectors";
+import IngredientDetails from "../ingredient-details/ingredient-details";
 import styles from "./ingredient.module.css";
 
-export function Ingredient() {
+export function Ingredient(): JSX.Element {
   const { id } = useParams();
   const ingredientGroups = useSelector(getIngredientGroupsData);
-
   const selectedIngredient = ingredientGroups
+    // @ts-ignore
     .flatMap((group) => group.ingredients)
+    // @ts-ignore
     .find((ingredient) => ingredient._id === id);
 
   return (

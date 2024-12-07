@@ -2,11 +2,20 @@ import { useEffect } from "react";
 import ReactDOM from "react-dom";
 import styles from "./modal-window.module.css";
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import PropTypes from "prop-types";
 
-const ModalWindow = ({ isOpen, onClose, children }) => {
+type ModalWindowProps = {
+  isOpen: boolean;
+  onClose: () => void;
+  children: React.ReactNode;
+};
+
+const ModalWindow = ({
+  isOpen,
+  onClose,
+  children,
+}: ModalWindowProps): JSX.Element | null => {
   useEffect(() => {
-    const handleKeyDown = (e) => {
+    const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         onClose();
       }
@@ -21,7 +30,7 @@ const ModalWindow = ({ isOpen, onClose, children }) => {
     return () => {
       document.body.classList.remove("modalOpen");
       document.removeEventListener("keydown", handleKeyDown);
-    }
+    };
   }, [isOpen]);
 
   if (!isOpen) return null;
@@ -37,14 +46,8 @@ const ModalWindow = ({ isOpen, onClose, children }) => {
         <div className={styles.children}>{children}</div>
       </div>
     </div>,
-    document.getElementById("modal-root")
+    document.getElementById("modal-root")!
   );
-};
-
-ModalWindow.propTypes = {
-  isOpen: PropTypes.bool.isRequired,
-  onClose: PropTypes.func.isRequired,
-  children: PropTypes.node.isRequired,
 };
 
 export default ModalWindow;

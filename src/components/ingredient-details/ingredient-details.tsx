@@ -1,8 +1,18 @@
 import styles from "./ingredient-details.module.css";
-import PropTypes from "prop-types";
 import IngredientProperty from "./ingredient-property/ingredient-property";
 
-const IngredientDetails = ({ item }) => {
+type TIngredientDetails = {
+  item: {
+    image_large: string;
+    name: string;
+    calories: number;
+    proteins: number;
+    fat: number;
+    carbohydrates: number;
+  };
+};
+
+const IngredientDetails = ({ item }: TIngredientDetails): JSX.Element => {
   return (
     <div>
       <div className={styles.header}>Детали ингредиента</div>
@@ -17,7 +27,5 @@ const IngredientDetails = ({ item }) => {
     </div>
   );
 };
-
-IngredientDetails.propTypes = {};
 
 export default IngredientDetails;

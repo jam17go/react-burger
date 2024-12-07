@@ -3,7 +3,7 @@ import styles from "./order-details.module.css";
 import { useSelector } from "react-redux";
 import { getOrder, getOrderErrorStatus, getOrderLoadingStatus } from "../../services/order/selectors";
 
-const OrderDetails = () => {
+export function OrderDetails(): JSX.Element {
   const loading = useSelector(getOrderLoadingStatus);
   const error = useSelector(getOrderErrorStatus);
   const order = useSelector(getOrder);
@@ -39,6 +39,8 @@ const OrderDetails = () => {
       </div>
     );
   }
+
+  return <></>;
 };
 
 export default OrderDetails;

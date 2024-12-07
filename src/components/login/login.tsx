@@ -8,15 +8,21 @@ import { login } from "../../services/user/actions";
 import { NavLink } from "react-router-dom";
 import React from "react";
 
-export function Login() {
+export function Login(): JSX.Element {
   const dispatch = useDispatch();
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
-  const error = useSelector((store) => store.user.loginError);
+  const error = useSelector(
+    // @ts-ignore
+    (store) => store.user.loginError
+  );
 
-  const handleLogin = (event) => {
+  const handleLogin = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
-    dispatch(login(email, password));
+    dispatch(
+      // @ts-ignore
+      login(email, password)
+    );
   };
 
   return (

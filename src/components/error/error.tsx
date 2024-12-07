@@ -1,6 +1,10 @@
 import styles from "./error.module.css";
 
-export function Error({errorText}) {
+type ErrorProps = {
+  errorText: string;
+};
+
+export function Error({errorText}: ErrorProps): JSX.Element {
   return (
     <>
       <div className={styles.container}>

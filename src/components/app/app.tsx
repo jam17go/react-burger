@@ -1,6 +1,6 @@
-import AppHeader from "../app-header/app-header.js";
+import AppHeader from "../app-header/app-header";
 import styles from "./app.module.css";
-import { loadIngredients } from "../../services/burger-ingredients/actions.js";
+import { loadIngredients } from "../../services/burger-ingredients/actions";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { DndProvider } from "react-dnd";
@@ -28,7 +28,9 @@ function App() {
   let state = location.state;
 
   useEffect(() => {
+    // @ts-ignore
     dispatch(checkUserAuth());
+    // @ts-ignore
     dispatch(loadIngredients());
   }, []);
 

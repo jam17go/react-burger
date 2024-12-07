@@ -5,11 +5,12 @@ import { NavLink } from "react-router-dom";
 import { Outlet } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 
-export function Profile() {
+export function Profile(): JSX.Element {
   const dispatch = useDispatch();
   const location = useLocation();
 
   const handleLogout = () => {
+    // @ts-ignore
     dispatch(logout());
   };
 

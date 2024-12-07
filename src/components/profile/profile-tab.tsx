@@ -7,8 +7,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { updateUser } from "../../services/profile/actions";
 
-export function ProfileTab() {
+export function ProfileTab(): JSX.Element {
   const dispatch = useDispatch();
+
+  // @ts-ignore
   const user = useSelector((store) => store.user.user);
 
   const [usernameValue, setUsernameValue] = useState(user?.name || "");
@@ -21,12 +23,13 @@ export function ProfileTab() {
     setPasswordValue(user?.password || "");
   }, [user]);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
+    // @ts-ignore
     dispatch(updateUser(usernameValue, emailValue, passwordValue));
   };
 
-  const handleCancel = () => {
+  const handleCancel = (): void => {
     setUsernameValue(user?.name || "");
     setEmailValue(user?.email || "");
     setPasswordValue(user?.password || "");

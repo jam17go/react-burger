@@ -7,14 +7,20 @@ import { useDispatch } from "react-redux";
 import { passwordReset } from "../../services/password-reset/actions";
 import { useNavigate } from "react-router-dom";
 import { NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useState } from "react";
 
-export function ForgotPassword() {
+export function ForgotPassword(): JSX.Element {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [email, setEmail] = useState("");
 
-  const handleResetPassword = (event) => {
+  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(event.target.value);
+  }
+
+  const handleResetPassword = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    // @ts-ignore
     dispatch(passwordReset(event.target.email.value));
     navigate("/reset-password");
   };
@@ -30,6 +36,8 @@ export function ForgotPassword() {
             name={"email"}
             placeholder="Логин"
             extraClass="mb-6"
+            value={email}
+            onChange={handleEmailChange}
           />
           <Button
             htmlType="submit"
