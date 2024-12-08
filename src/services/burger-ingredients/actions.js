@@ -1,4 +1,4 @@
-import { getBurgerIngredients } from "../../utils/stellar-burger-api.js";
+import { getBurgerIngredients } from "../../utils/stellar-burger-api.ts";
 
 export const LOAD_INGREDIENTS_SUCCESS = "LOAD_INGREDIENTS_SUCCESS";
 export const INGREDIENTS_LOADING = "INGREDIENTS_LOADING";
