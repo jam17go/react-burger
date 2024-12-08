@@ -14,10 +14,11 @@ import { cleanupConstructorState } from "../../../services/burger-constructor/ac
 import { resetOrder } from "../../../services/order/actions";
 import { useNavigate } from "react-router";
 
-export const Order = () => {
+export const Order = (): JSX.Element => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const totalPrice = useSelector(getTotalPrice);
   const ingredients = useSelector(getSelectedIngredients);
+  // @ts-ignore
   const user = useSelector((store) => store.user.user);
   const navigate = useNavigate();
   
@@ -28,6 +29,7 @@ export const Order = () => {
       navigate("/login", { state: { from: "/" } });
     } else {
       setIsModalOpen(true);
+      // @ts-ignore
       dispatch(placeOrder(ingredients));
     }
   };
@@ -44,7 +46,7 @@ export const Order = () => {
       <div className={styles.buttonBox}>
         <div className={styles.currency}>
           {totalPrice}&nbsp;
-          <CurrencyIcon />
+          <CurrencyIcon type="primary"/>
         </div>
 
         <div onClick={onOpenOrder}>

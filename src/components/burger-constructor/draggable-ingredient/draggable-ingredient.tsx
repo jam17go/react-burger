@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { useDispatch } from "react-redux";
-import { useDrop, useDrag } from "react-dnd";
+import { useDrop, useDrag, DragSourceMonitor, DropTargetMonitor } from "react-dnd";
 import {
   ConstructorElement,
   DragIcon,
@@ -11,28 +11,50 @@ import {
 } from "../../../services/burger-constructor/actions";
 import styles from "./draggable-ingredient.module.css";
 
-export const DraggableIngredient = ({ ingredient, index }) => {
+type TIngredientItem = {
+  _id: string;
+  name: string;
+  image: string;
+  price: number;
+  index: number;
+};
+
+type TDragItem = {
+  index: number;
+  ingredient: TIngredientItem;
+  type: string;
+};
+
+type TDraggableIngredientProps = {
+  ingredient: TIngredientItem;
+  index: number;
+};
+
+export const DraggableIngredient = ({
+  ingredient,
+  index,
+}: TDraggableIngredientProps): JSX.Element => {
   const dispatch = useDispatch();
 
-  const ref = useRef(null);
+  const ref = useRef<HTMLDivElement | null>(null);
 
-  const handleRemoveIngredient = (ingredient) => () => {
+  const handleRemoveIngredient = (ingredient: TIngredientItem) => () => {
     dispatch(removeIngredient(ingredient));
   };
 
-  const [{ isDragging }, dragRef] = useDrag({
+  const [{ isDragging }, dragRef] = useDrag<TDragItem, unknown, { isDragging: boolean }>({
     type: "selectedIngredient",
     item: () => {
-      return { ingredient, index };
+      return { ingredient, index, type: "selectedIngredient" };
     },
-    collect: (monitor) => ({
+    collect: (monitor: DragSourceMonitor) => ({
       isDragging: monitor.isDragging(),
     }),
   });
 
-  const [, dropRef] = useDrop({
+  const [, dropRef] = useDrop<TDragItem>({
     accept: "selectedIngredient",
-    hover: (item, monitor) => {
+    hover: (item: TDragItem, monitor: DropTargetMonitor) => {
       if (!ref.current) {
         return;
       }
@@ -47,7 +69,11 @@ export const DraggableIngredient = ({ ingredient, index }) => {
       const hoverBoundingRect = ref.current.getBoundingClientRect();
       const hoverMiddleY =
         (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
+
       const clientOffset = monitor.getClientOffset();
+      if (!clientOffset) {
+        return;
+      }
       const hoverClientY = clientOffset.y - hoverBoundingRect.top;
 
       if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
@@ -70,7 +96,7 @@ export const DraggableIngredient = ({ ingredient, index }) => {
 
   return (
     <div ref={ref} className={styles.item} style={{ opacity }}>
-      <DragIcon />
+      <DragIcon type="primary" />
       <ConstructorElement
         text={ingredient.name}
         price={ingredient.price}

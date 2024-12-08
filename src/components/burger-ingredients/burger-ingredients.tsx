@@ -2,31 +2,44 @@ import { useState, useRef } from "react";
 import styles from "./burger-ingredients.module.css";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import IngredientItemGroup from "./ingredient-item-group/ingredient-item-group";
-import PropTypes from "prop-types";
-import { ingredientItemPropType } from "../../types/prop-types";
 import { useSelector } from "react-redux";
-import { getIngredientGroupsData } from "../../services/burger-ingredients/selectors.js";
+import { getIngredientGroupsData } from "../../services/burger-ingredients/selectors";
 
-const BurgerIngredients = () => {
-  const ingredientGroups = useSelector(getIngredientGroupsData);
-  const [currentTab, setCurrentTab] = useState();
-  const tabRef = useRef(null);
-  const groupRefs = useRef([]);
+type Ingredient = {
+  _id: string;
+  name: string;
+  type: string;
+  price: number;
+  image: string;
+};
+
+type IngredientGroup = {
+  groupName: string;
+  ingredients: Ingredient[];
+};
+
+const BurgerIngredients = (): JSX.Element => {
+  const ingredientGroups = useSelector(getIngredientGroupsData) as IngredientGroup[];
+  const [currentTab, setCurrentTab] = useState<string | null>(null);
+  const tabRef = useRef<HTMLDivElement | null>(null);
+  const groupRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   const onScrollHandler = () => {
+    if (!tabRef.current) return;
     const tabsBottom = tabRef.current.getBoundingClientRect().bottom;
 
     let minDiff = Number.MAX_VALUE;
     let currentTabName = "";
 
-    for (let i = 0; i < groupRefs.current.length; i++) {
-      const diff = Math.abs(groupRefs.current[i].getBoundingClientRect().top - tabsBottom);
-
-      if (diff < minDiff) {
-        minDiff = diff;
-        currentTabName = groupRefs.current[i].getAttribute('data-value');
+    groupRefs.current.forEach((groupRef, index) => {
+      if (groupRef) {
+        const diff = Math.abs(groupRef.getBoundingClientRect().top - tabsBottom);
+        if (diff < minDiff) {
+          minDiff = diff;
+          currentTabName = groupRef.getAttribute("data-value") || "";
+        }
       }
-    }
+    });
 
     setCurrentTab(currentTabName);
   };
@@ -38,7 +51,11 @@ const BurgerIngredients = () => {
       <div className={styles.tabs} ref={tabRef}>
         {ingredientGroups.map((group, index) => (
           <div key={index}>
-            <Tab value={group.groupName} active={currentTab === group.groupName}>
+            <Tab
+              value={group.groupName}
+              active={currentTab === group.groupName}
+              onClick={() => setCurrentTab(group.groupName)}
+            >
               {group.groupName}
             </Tab>
           </div>
@@ -61,17 +78,6 @@ const BurgerIngredients = () => {
       </div>
     </div>
   );
-};
-
-BurgerIngredients.propTypes = {
-  ingredientGroups: PropTypes.arrayOf(
-    PropTypes.shape({
-      groupName: PropTypes.string.isRequired,
-      ingredients: PropTypes.arrayOf(
-        ingredientItemPropType
-      ).isRequired,
-    })
-  ),
 };
 
 export default BurgerIngredients;

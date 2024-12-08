@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { getSelectedIngredients } from "../../../services/burger-constructor/selectors.js";
 import { DraggableIngredient } from "../draggable-ingredient/draggable-ingredient";
 
-export const Ingredients = () => {
+export const Ingredients = (): JSX.Element => {
   const ingredients = useSelector(getSelectedIngredients);
 
   return (
@@ -16,13 +16,16 @@ export const Ingredients = () => {
 
       {ingredients.length > 0 && (
         <div className={styles.list}>
-          {ingredients.map((ingredient, index) => (
-            <DraggableIngredient
-              ingredient={ingredient}
-              index={index}
-              key={ingredient.listId}
-            />
-          ))}
+          {ingredients.map(
+            // @ts-ignore
+            (ingredient, index) => (
+              <DraggableIngredient
+                ingredient={ingredient}
+                index={index}
+                key={ingredient.listId}
+              />
+            )
+          )}
         </div>
       )}
     </>

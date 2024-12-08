@@ -1,12 +1,11 @@
 import ModalWindow from "../../modal-window/modal-window";
-import { ingredientItemPropType } from "../../../types/prop-types";
 import { setCurrentIngredient } from "../../../services/ingredient-details/actions";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { Ingredient } from "../../ingredient/ingredient";
 
-export const IngredientModal = () => {
+export const IngredientModal = (): JSX.Element => {
   const [isModalOpen, setIsModalOpen] = useState(true);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -24,6 +23,3 @@ export const IngredientModal = () => {
   );
 };
 
-IngredientModal.propTypes = {
-  item: ingredientItemPropType,
-};

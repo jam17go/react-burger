@@ -1,9 +1,19 @@
 import styles from "./ingredient-item-group.module.css";
 import IngredientItem from "../ingredient-item/ingredient-item";
-import PropTypes from "prop-types";
-import { ingredientItemPropType } from "../../../types/prop-types";
 
-const IngredientItemGroup = ({ groupName, ingredients }) => {
+export type TIngredientItemPropType = {
+  _id: string;
+  name: string;
+  image: string;
+  price: number;
+};
+
+export type TIngredientItemGroupProps = {
+  groupName: string;
+  ingredients: Array<TIngredientItemPropType>;
+};
+
+const IngredientItemGroup = ({ groupName, ingredients }: TIngredientItemGroupProps):  JSX.Element=> {
   return (
     <div className={styles.group}>
       <div className={styles.groupName}>{groupName}</div>
@@ -16,11 +26,6 @@ const IngredientItemGroup = ({ groupName, ingredients }) => {
       </div>
     </div>
   );
-};
-
-IngredientItemGroup.propTypes = {
-  groupName: PropTypes.string.isRequired,
-  ingredients: PropTypes.arrayOf(ingredientItemPropType).isRequired,
 };
 
 export default IngredientItemGroup;

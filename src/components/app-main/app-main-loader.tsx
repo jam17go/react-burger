@@ -1,9 +1,16 @@
 import styles from "./app-main.module.css";
 import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
-import { getLoadingStatus, getErrorStatus } from "../../services/burger-ingredients/selectors.js";
+import {
+  getLoadingStatus,
+  getErrorStatus,
+} from "../../services/burger-ingredients/selectors.js";
 
-function AppMainLoader({ children }) {
+type TAppMainLoaderProps = {
+  children: React.ReactNode;
+};
+
+function AppMainLoader({ children }: TAppMainLoaderProps): JSX.Element {
   const loading = useSelector(getLoadingStatus);
   const error = useSelector(getErrorStatus);
 
@@ -15,7 +22,7 @@ function AppMainLoader({ children }) {
     return <div className={styles.error}>Ошибка загрузки данных</div>;
   }
 
-  return children;
+  return <>{children}</>;
 }
 
 AppMainLoader.propTypes = {

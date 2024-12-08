@@ -3,7 +3,11 @@ import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-comp
 import { useSelector } from "react-redux";
 import { getSelectedBun } from "../../../services/burger-constructor/selectors.js";
 
-export const Buns = ({ children }) => {
+type TBunsProps = {
+  children: React.ReactNode;
+};
+
+export const Buns = ({ children }: TBunsProps): JSX.Element => {
   const bun = useSelector(getSelectedBun);
 
   return (

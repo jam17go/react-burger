@@ -6,7 +6,7 @@ import { Ingredients } from "./ingredients/ingredients";
 import { Order } from "./order/order";
 import { Buns } from "./buns/buns";
 
-const BurgerConstructor = () => {
+const BurgerConstructor = (): JSX.Element => {
   const dispatch = useDispatch();
 
   const [, dropRef] = useDrop({
@@ -27,7 +27,5 @@ const BurgerConstructor = () => {
     </div>
   );
 };
-
-BurgerConstructor.propTypes = {};
 
 export default BurgerConstructor;
