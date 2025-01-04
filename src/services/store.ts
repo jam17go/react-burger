@@ -8,8 +8,15 @@ import { reducer as ingredientDetailsReducer } from "./ingredient-details/reduce
 import { reducer as authenticationReducer } from "./password-reset/reducer";
 import { reducer as loginReducer } from "./login/reducer";
 import { reducer as userReducer } from "./user/reducer";
+import { TIngredientDetailsActions } from "./ingredient-details/actions";
+import { TBurgerConstructorActions } from "./burger-constructor/actions";
+import { TOrderActions } from "./order/actions";
+import { TLoginActions } from "./login/actions";
+import { TUserActions } from "./user/actions";
+import { ThunkAction } from 'redux-thunk';
+import { Action, ActionCreator } from 'redux';
 
-const rootReducer = combineReducers({
+export const rootReducer = combineReducers({
   burgerIngredients: ingredientsReducer,
   burgerConstructor: constructorReducer,
   order: orderReducer,
@@ -19,9 +26,25 @@ const rootReducer = combineReducers({
   user: userReducer,
 });
 
+export type RootState = ReturnType<typeof store.getState>;
+
+export type TApplicationActions =
+  | TIngredientDetailsActions
+  | TBurgerConstructorActions
+  | TOrderActions
+  | TIngredientDetailsActions
+  | TLoginActions
+  | TUserActions;
+
+export type AppThunk<TReturn = void> = ActionCreator<
+  ThunkAction<TReturn, Action, RootState, TApplicationActions>
+>; 
+
+export const store = createStore(
+  rootReducer,
+  composeWithDevToolsDevelopmentOnly(applyMiddleware(thunk)) as any
+);
+
 export const configureStore = () => {
-  return createStore(
-    rootReducer,
-    composeWithDevToolsDevelopmentOnly(applyMiddleware(thunk))
-  );
+  return store;
 };

@@ -7,6 +7,14 @@ import {
   PASSWORD_RESET_RESET_PENDING,
   PASSWORD_RESET_RESET_ERROR,
 } from "./actions";
+import { TPasswordResetActions } from "./actions";
+
+type TPasswordResetState = {
+  loading: boolean;
+  success: boolean;
+  error: boolean;
+  passwordResetFlag: boolean;
+};
 
 export const initialState = {
   loading: false,
@@ -15,7 +23,7 @@ export const initialState = {
   passwordResetFlag: false,
 };
 
-export const reducer = (state = initialState, action) => {
+export const reducer = (state = initialState, action: TPasswordResetActions): TPasswordResetState => {
   switch (action.type) {
     case PASSWORD_RESET_PENDING:
       return {

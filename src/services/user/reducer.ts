@@ -1,4 +1,11 @@
 import { SET_AUTH_CHECKED, SET_USER, SET_LOGIN_ERROR } from './actions';
+import { TUserActions } from './actions';
+
+type TUserState = {
+  user: null | any,
+  isAuthChecked: boolean,
+  loginError: null | any
+};
 
 const initialState = {
     user: null,
@@ -6,7 +13,7 @@ const initialState = {
     loginError: null
 };
 
-export const reducer = (state = initialState, action) => {
+export const reducer = (state = initialState, action: TUserActions): TUserState => {
   switch (action.type) {
     case SET_AUTH_CHECKED:
       return {

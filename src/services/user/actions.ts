@@ -3,23 +3,24 @@ import {
   logoutRequest,
   getUserRequest,
 } from "../../utils/stellar-burger-api";
+import { AppDispatch } from "../hooks";
 
 export const SET_AUTH_CHECKED = "SET_AUTH_CHECKED";
 export const SET_USER = "SET_USER";
 export const SET_LOGIN_ERROR = "SET_LOGIN_ERROR";
 
-export const setAuthChecked = (value) => ({
+export const setAuthChecked = (value: boolean) => ({
   type: SET_AUTH_CHECKED,
   payload: value,
 });
 
-export const setUser = (user) => ({
+export const setUser = (user: any) => ({
   type: SET_USER,
   payload: user,
 });
 
-export const login = (email, password) => {
-  return async (dispatch) => {
+export const login = (email: string, password: string) => {
+  return async (dispatch: AppDispatch) => {
     return loginRequest(email, password)
       .then((res) => {
         dispatch(setUser(res.user));
@@ -40,7 +41,7 @@ export const login = (email, password) => {
 };
 
 export const checkUserAuth = () => {
-  return (dispatch) => {
+  return (dispatch: AppDispatch) => {
     if (localStorage.getItem("accessToken")) {
       getUserRequest()
         .then((res) => dispatch(setUser(res.user)))
@@ -52,9 +53,11 @@ export const checkUserAuth = () => {
 };
 
 export const logout = () => {
-  return (dispatch) => {
+  return async (dispatch: AppDispatch) => {
     return logoutRequest().then(() => {
       dispatch(setUser(null));
     });
   };
 };
+
+export type TUserActions = any;

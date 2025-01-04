@@ -6,6 +6,14 @@ import {
   LOGOUT_ERROR,
   LOGOUT_PENDING,
 } from "./actions";
+import { TLoginActions } from "./actions";
+
+type TLoginState = {
+  success: boolean;
+  error: boolean;
+  pending: boolean;
+  user: null | any;
+};
 
 const initialState = {
   success: false,
@@ -14,7 +22,7 @@ const initialState = {
   user: null,
 };
 
-export const reducer = (state = initialState, action) => {
+export const reducer = (state = initialState, action: TLoginActions): TLoginState => {
   switch (action.type) {
     case LOGIN_SUCCESS:
       return {

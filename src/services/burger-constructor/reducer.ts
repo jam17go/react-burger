@@ -3,7 +3,16 @@ import {
   REMOVE_INGREDIENT,
   CLEANUP_CONSTRUCTOR_STATE,
   MOVE_INGREDIENT,
-} from "./actions.js";
+} from "./actions";
+
+import { TBurgerConstructorActions } from "./actions";
+import { IIngredient } from "./actions";
+
+type TBurgerConstructorState = {
+  ingredients: Array<IIngredient>;
+  bun: any;
+  activeIngredientGroup: string;
+};
 
 const initialState = {
   ingredients: [],
@@ -11,7 +20,7 @@ const initialState = {
   activeIngredientGroup: "Булки",
 };
 
-export const reducer = (state = initialState, action) => {
+export const reducer = (state = initialState, action: TBurgerConstructorActions): TBurgerConstructorState => {
   switch (action.type) {
     case ADD_INGREDIENT:
       if (action.payload.type === "bun") {
@@ -28,7 +37,7 @@ export const reducer = (state = initialState, action) => {
       return {
         ...state,
         ingredients: state.ingredients.filter(
-          (ingredient) => ingredient.listId !== action.payload.listId
+          (item: IIngredient) => item.listId !== action.payload.listId
         ),
       };
     case CLEANUP_CONSTRUCTOR_STATE:

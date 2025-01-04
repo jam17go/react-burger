@@ -6,7 +6,8 @@ import {
 import { useState } from "react";
 import ModalWindow from "../../modal-window/modal-window";
 import OrderDetails from "../../order-details/order-details";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
+import { useDispatch } from "../../../services/hooks";
 import { getTotalPrice } from "../../../services/burger-constructor/selectors";
 import { getSelectedIngredients } from "../../../services/burger-constructor/selectors.js";
 import { placeOrder } from "../../../services/order/actions";

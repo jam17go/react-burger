@@ -1,10 +1,11 @@
-import { getBurgerIngredients } from "../../utils/stellar-burger-api.ts";
+import { getBurgerIngredients } from "../../utils/stellar-burger-api";
+import { AppDispatch } from "../hooks";
 
 export const LOAD_INGREDIENTS_SUCCESS = "LOAD_INGREDIENTS_SUCCESS";
 export const INGREDIENTS_LOADING = "INGREDIENTS_LOADING";
 export const INGREDIENTS_ERROR = "INGREDIENTS_ERROR";
 
-export const loadIngredients = () => (dispatch) => {
+export const loadIngredients = () => (dispatch: AppDispatch) => {
   dispatch({ type: INGREDIENTS_LOADING });
 
   getBurgerIngredients()
@@ -43,3 +44,5 @@ export const loadIngredients = () => (dispatch) => {
       dispatch({ type: INGREDIENTS_ERROR });
     });
 };
+
+export type TBurgerIngredientsActions = any;

@@ -3,6 +3,13 @@ import {
   UPDATE_USER_ERROR,
   UPDATE_USER_PENDING,
 } from "./actions";
+import { TProfileActions } from "./actions";
+
+type TProfileState = {
+  user: any,
+  loading: boolean,
+  error: null | any,
+};
 
 const initialState = {
   user: {},
@@ -10,7 +17,7 @@ const initialState = {
   error: null,
 };
 
-export const reducer = (state = initialState, action) => {
+export const reducer = (state = initialState, action:TProfileActions): TProfileState => {
   switch (action.type) {
     case UPDATE_USER_PENDING:
       return {

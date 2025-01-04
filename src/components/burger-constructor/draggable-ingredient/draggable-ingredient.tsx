@@ -1,5 +1,4 @@
 import { useRef } from "react";
-import { useDispatch } from "react-redux";
 import { useDrop, useDrag, DragSourceMonitor, DropTargetMonitor } from "react-dnd";
 import {
   ConstructorElement,
@@ -10,6 +9,8 @@ import {
   moveIngredient,
 } from "../../../services/burger-constructor/actions";
 import styles from "./draggable-ingredient.module.css";
+import { IIngredient } from "../../../services/burger-constructor/actions";
+import { useDispatch } from "../../../services/hooks";
 
 type TIngredientItem = {
   _id: string;
@@ -21,12 +22,12 @@ type TIngredientItem = {
 
 type TDragItem = {
   index: number;
-  ingredient: TIngredientItem;
+  ingredient: IIngredient;
   type: string;
 };
 
 type TDraggableIngredientProps = {
-  ingredient: TIngredientItem;
+  ingredient: IIngredient;
   index: number;
 };
 
@@ -38,7 +39,7 @@ export const DraggableIngredient = ({
 
   const ref = useRef<HTMLDivElement | null>(null);
 
-  const handleRemoveIngredient = (ingredient: TIngredientItem) => () => {
+  const handleRemoveIngredient = (ingredient: IIngredient) => () => {
     dispatch(removeIngredient(ingredient));
   };
 

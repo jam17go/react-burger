@@ -1,4 +1,5 @@
 import { ENDPOINTS } from "../config/api";
+import { IIngredient } from "../services/burger-constructor/actions";
 
 type TIngredient = {
   _id: string;
@@ -135,7 +136,7 @@ export const fetchWithRefresh = async <T>(
 };
 
 export const postOrder = (
-  ingredients: string[]
+  ingredients: IIngredient[]
 ): Promise<TResponsePostOrder> => {
   const accessToken = localStorage.getItem("accessToken") || "";
 

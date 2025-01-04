@@ -2,17 +2,17 @@ import {
   passwordResetRequest,
   passwordResetResetRequest,
 } from "../../utils/stellar-burger-api";
+import { AppDispatch } from "../hooks";
 
 export const PASSWORD_RESET_SUCCESS = "PASSWORD_RESET_SUCCESS";
 export const PASSWORD_RESET_ERROR = "PASSWORD_RESET_ERROR";
 export const PASSWORD_RESET_PENDING = "PASSWORD_RESET_PENDING";
 export const PASSWORD_RESET_FLAG = "PASSWORD_RESET_FLAG";
-
 export const PASSWORD_RESET_RESET_SUCCESS = "PASSWORD_RESET_RESET_SUCCESS";
 export const PASSWORD_RESET_RESET_ERROR = "PASSWORD_RESET_RESET_ERROR";
 export const PASSWORD_RESET_RESET_PENDING = "PASSWORD_RESET_RESET_PENDING";
 
-export const passwordReset = (email) => (dispatch) => {
+export const passwordReset = (email: string) => (dispatch: AppDispatch) => {
   dispatch({
     type: PASSWORD_RESET_PENDING,
   });
@@ -33,7 +33,7 @@ export const passwordReset = (email) => (dispatch) => {
       });
     });
 };
-export const passwordResetReset = (password, token) => (dispatch) => {
+export const passwordResetReset = (password: string, token: string) => (dispatch: AppDispatch) => {
   dispatch({
     type: PASSWORD_RESET_RESET_PENDING,
   });
@@ -50,3 +50,5 @@ export const passwordResetReset = (password, token) => (dispatch) => {
       });
     });
 };
+
+export type TPasswordResetActions = any;

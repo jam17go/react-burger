@@ -1,4 +1,11 @@
 import { REGISTER_SUCCESS, REGISTER_ERROR, REGISTER_PENDING } from "./actions";
+import { TRegistrationActions } from "./actions";
+
+type TRegistrationState = {
+    success: boolean,
+    error: boolean,
+    pending: boolean,
+};
 
 const initialState = {
     success: false,
@@ -6,7 +13,7 @@ const initialState = {
     pending: false,
     };
 
-export const registrationReducer = (state = initialState, action) => {
+export const registrationReducer = (state = initialState, action: TRegistrationActions): TRegistrationState => {
     switch (action.type) {
         case REGISTER_SUCCESS:
             return {

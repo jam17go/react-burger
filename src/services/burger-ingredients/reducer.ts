@@ -2,7 +2,15 @@ import {
   LOAD_INGREDIENTS_SUCCESS,
   INGREDIENTS_LOADING,
   INGREDIENTS_ERROR,
-} from "./actions.js";
+} from "./actions";
+
+import { TBurgerIngredientsActions } from "./actions";
+
+type TBurgerIngredientsState = {
+  ingredientGroups: any[];
+  loading: boolean;
+  error: boolean;
+};
 
 export const initialState = {
   ingredientGroups: [],
@@ -10,7 +18,7 @@ export const initialState = {
   error: false,
 };
 
-export const reducer = (state = initialState, action) => {
+export const reducer = (state = initialState, action: TBurgerIngredientsActions): TBurgerIngredientsState => {
   switch (action.type) {
     case INGREDIENTS_LOADING:
       return {

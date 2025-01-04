@@ -22,5 +22,5 @@
   },
   "include": [
     "src/**/*.ts", "src/**/*.tsx", "src/global.d.ts"
-, "src/components/protected-route/protected-route.tsx"  ]
+, "src/components/protected-route/protected-route.tsx", "src/services/store.ts"  ]
 }

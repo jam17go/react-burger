@@ -3,7 +3,14 @@ import {
   PLACE_ORDER_PENDING,
   PLACE_ORDER_SUCCESS,
   PLACE_ORDER_RESET,
-} from "./actions.js";
+} from "./actions";
+import { TOrderActions } from "./actions";
+
+type TOrderState = {
+  order: null | any,
+  loading: boolean,
+  error: boolean,
+};
 
 export const initialState = {
   order: null,
@@ -11,7 +18,7 @@ export const initialState = {
   error: false,
 };
 
-export const reducer = (state = initialState, action) => {
+export const reducer = (state = initialState, action: TOrderActions): TOrderState => {
   switch (action.type) {
     case PLACE_ORDER_PENDING:
       return {
