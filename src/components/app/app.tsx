@@ -24,6 +24,8 @@ import { payload } from "./const"
 import { useDispatch } from "../../services/hooks";
 import { updateOrders } from "../../services/orders-feed/actions";
 import { WS_CONNECTION_START } from "../../services/middleware/actions";
+import { OrderModal } from "../orders-feed/feed-display/order-modal";
+import { OrdersPage } from "../../pages/orders-page";
 
 function App() {
   const dispatch = useDispatch();
@@ -34,7 +36,6 @@ function App() {
   useEffect(() => {
     dispatch(checkUserAuth());
     dispatch(loadIngredients());
-    // dispatch(updateOrders(payload));
     dispatch({ type: WS_CONNECTION_START });
   }, []);
 
@@ -69,6 +70,7 @@ function App() {
             <Route path="order-history-tab" element={<OrderHistoryTab />} />
           </Route>
           <Route path="/ingredients/:id" element={<IngredientsPage />} />
+          <Route path="/orders/:id" element={<OrdersPage />} />
           <Route path="/orders" element={<OrdersFeedPage />} />
           <Route
             path="*"
@@ -79,6 +81,7 @@ function App() {
         {state?.backgroundLocation && (
           <Routes>
             <Route path="/ingredients/:id" element={<IngredientModal />} />
+            <Route path="/orders/:id" element={<OrderModal />} />
           </Routes>
         )}
       </DndProvider>

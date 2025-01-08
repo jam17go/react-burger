@@ -22,6 +22,14 @@
   gap: 20px;
 }
 
+.orderIngredients {
+  max-height: 35vh;
+  overflow-y: auto;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
 .orderName {
   composes: mb-6 from global;
   composes: text text_type_main-medium from global;
@@ -91,4 +99,47 @@
   justify-content: space-between;
   align-items: center;
   composes: mb-2 from global;
+}
+
+.orderItem {
+  cursor: pointer;
+  text-decoration: none; /* Ensures no underline */
+  color: inherit; /* Inherits color from parent or global styles */
+}
+
+.orderItem:visited,
+.orderItem:active,
+.orderItem:hover {
+  text-decoration: none; /* Prevents underline on visited or hover state */
+  color: inherit; /* Keeps text color consistent */
+}
+
+.ingredientDetails {
+  display: flex;
+  /* justify-content: space-between; */
+  align-items: center;
+  composes: mb-2 mr-6 from global;
+}
+
+.ingredientName {
+  composes: text text_type_main-small from global;
+}
+
+.ingredientPrice {
+  composes: text text_type_digits-default from global;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  margin-left: auto;
+}
+
+.orderFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  composes: mt-6 from global;
+}
+
+.orderContainer {
+  composes: mr-6 ml-6 from global;
 }
