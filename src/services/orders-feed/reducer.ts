@@ -1,14 +1,6 @@
 import { payload } from "../../components/app/const";
 import { TOrdersFeedActions } from "./actions";
-
-export type TOrder = {
-  _id: string;
-  number: number;
-  name: string;
-  status: string;
-  createdAt: string;
-  ingredients: string[];
-};
+import { getIngredientGroupsData } from "../burger-ingredients/selectors";
 
 export type TOrderFeedState = {
   readyOrders: number[];
@@ -17,6 +9,32 @@ export type TOrderFeedState = {
   totalTodayOrders: number;
   orders: TOrder[];
 };
+
+export type TIngredient = {
+  _id: string;
+  name: string;
+  image: string;
+  price: number;
+}
+
+export type TOrder = {
+  _id: string;
+  number: number;
+  name: string;
+  status: string;
+  createdAt: string;
+  ingredients: string[];
+}
+
+export type TOrderCalculated = {
+  _id: string;
+  number: number;
+  name: string;
+  status: string;
+  createdAt: string;
+  ingredients: TIngredient[];
+  price: number;
+}
 
 const initialState = {
   readyOrders: [],

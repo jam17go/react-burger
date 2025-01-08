@@ -4,17 +4,17 @@ import { useSelector } from "../../../services/hooks";
 import { getOrders } from "../../../services/orders-feed/selectors";
 
 const FeedDisplay = (): JSX.Element => {
-    const orders = useSelector(getOrders);
+  const orders = useSelector(getOrders);
 
   return (
     <div className={styles.section}>
-        <div className={styles.groups}>
-            {orders.map((item, index) => (
-            <div key={index} className={styles.order}>
-                <OrderCard order={item}/>
-            </div>
-            ))}
-        </div>
+      <div className={styles.groups}>
+        {orders.map((item, index) => (
+          <div key={index} className={styles.order}>
+            <OrderCard order={item} />
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

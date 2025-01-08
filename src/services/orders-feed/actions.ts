@@ -1,6 +1,13 @@
-import { TOrder } from "./reducer";
-
 export const UPDATE_ORDERS: "UPDATE_ORDERS" = "UPDATE_ORDERS";
+
+export type TOrder = {
+    _id: string;
+    number: number;
+    name: string;
+    status: string;
+    createdAt: string;
+    ingredients: string[];
+  };
 
 interface IOrdersResponse {
   orders: TOrder[];
