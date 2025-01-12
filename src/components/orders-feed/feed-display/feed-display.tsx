@@ -8,7 +8,7 @@ const FeedDisplay = (): JSX.Element => {
 
   return (
     <div className={styles.section}>
-      <div className={styles.groups}>
+      <div className={styles.groeups}>
         {orders.map((item, index) => (
           <div key={index} className={styles.order}>
             <OrderCard order={item} />

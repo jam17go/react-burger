@@ -1,52 +1,94 @@
-import type { Middleware, MiddlewareAPI } from 'redux';
+import type { Middleware, MiddlewareAPI } from "redux";
 
 import type {
   AppActions,
   TWSStoreActions,
-  AppDispatch,
-  RootState,
-} from './types';
+} from "./types";
+import { refreshToken } from "../../utils/stellar-burger-api";
 
-export const socketMiddleware = (wsUrl: string, wsActions: TWSStoreActions): Middleware => {
-  return ((store: MiddlewareAPI<AppDispatch, RootState>) => {
+export const socketMiddleware = (
+  wsActions: TWSStoreActions,
+  withTokenRefresh: boolean = false
+): Middleware => {
+  return (store) => {
     let socket: WebSocket | null = null;
+    const { wsInit, wsSendMessage, onOpen, onClose, onError, onMessage } =
+      wsActions;
 
-    return next => (action: AppActions) => {
+    let isConnected = false;
+    let reconnectTimer = 0;
+    let url = "";
+
+    return (next) => (action: AppActions) => {
       const { dispatch, getState } = store;
       const { type } = action;
-      const { wsInit, wsSendMessage, onOpen, onClose, onError, onMessage } = wsActions;
+      const { wsInit, wsSendMessage, onOpen, onClose, onError, onMessage } =
+        wsActions;
+      const url = action.payload;
 
-      if (type === wsInit) {
-        socket = new WebSocket(`${wsUrl}`);
+      if (type === wsInit && !isConnected) {
+        socket = new WebSocket(url);
       }
 
       if (socket) {
-        socket.onopen = event => {
+        const url = socket.url;
+
+        socket.onopen = (event) => {
           dispatch({ type: onOpen, payload: event });
         };
 
-        socket.onerror = event => {
+        socket.onerror = (event) => {
           dispatch({ type: onError, payload: event });
         };
 
-        socket.onmessage = event => {
+        socket.onmessage = (event) => {
           const { data } = event;
           const parsedData = JSON.parse(data);
-          const { success, ...restParsedData } = parsedData;
 
-          dispatch({ type: onMessage, payload: { ...restParsedData } });
+          if (
+            withTokenRefresh &&
+            parsedData.message === "Invalid or missing token"
+          ) {
+            refreshToken()
+              .then((refreshData) => {
+                const wssUrl = new URL(url);
+                wssUrl.searchParams.set(
+                  "token",
+                  refreshData.accessToken.replace("Bearer ", "")
+                );
+                dispatch({ type: wsInit, payload: wssUrl });
+              })
+              .catch((error) => {
+                dispatch({ type: onError, payload: error });
+              });
+
+            dispatch({ type: onClose, payload: event });
+
+            return;
+          }
+
+          const parsedUrl = new URL(url);
+          const protocol = parsedUrl.protocol; // "https:"
+          const host = parsedUrl.host;         // "example.com:8080" (includes port if present)
+          const path = parsedUrl.pathname;     // "/path/to/resource"
+
+          dispatch({ type: 'UPDATE_ORDERS', payload: {...parsedData, url: `${protocol}//${host}${path}`} });
         };
 
-        socket.onclose = event => {
+        socket.onclose = (event) => {
           dispatch({ type: onClose, payload: event });
         };
 
-        if (type === wsSendMessage) {
-          const payload = action.payload;
+        if (type == onClose) {
+          clearTimeout(reconnectTimer);
+          isConnected = false;
+          reconnectTimer = 0;
+          socket.close();
+          socket = null;
         }
       }
 
       next(action);
     };
-  }) as Middleware;
+  };
 };

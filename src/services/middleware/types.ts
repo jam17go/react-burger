@@ -11,6 +11,7 @@ import {
 } from './actions';
 
 import { UPDATE_ORDERS } from '../orders-feed/actions';
+import { updateOrders } from '../orders-feed/actions';
 
 export type AppActions = TApplicationActions
 export type RootState = ReturnType<typeof store.getState>;
@@ -23,5 +24,5 @@ export type TWSStoreActions = {
   onOpen: typeof  WS_CONNECTION_SUCCESS,
   onClose: typeof WS_CONNECTION_CLOSED,
   onError: typeof  WS_CONNECTION_ERROR,
-  onMessage: typeof  UPDATE_ORDERS,
+  onMessage: typeof  updateOrders,
 };

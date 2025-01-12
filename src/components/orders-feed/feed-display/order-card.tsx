@@ -1,11 +1,11 @@
 import styles from "./feed-display.module.css";
-import { TOrderCalculated } from "../../../services/orders-feed/reducer";
+import { IOrderCalculated } from "../../../services/orders-feed/actions";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { NavLink, useLocation } from "react-router-dom";
 import { getHumanReadableDate } from "../../../utils/date-utils";
 
 interface IOrderCard {
-  order: TOrderCalculated;
+  order: IOrderCalculated;
 }
 
 const OrderCard = ({ order }: IOrderCard): JSX.Element => {
@@ -13,7 +13,7 @@ const OrderCard = ({ order }: IOrderCard): JSX.Element => {
 
   return (
     <NavLink
-      to={`/orders/${order._id}`}
+      to={`/orders/${order.number}`}
       state={{ backgroundLocation: location }}
       className={styles.orderItem}
     >

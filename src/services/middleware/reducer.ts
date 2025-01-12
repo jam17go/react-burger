@@ -8,6 +8,7 @@ import { TWSActions } from "./actions";
 
 type TWSState = {
   wsConnected: boolean;
+  url?: string;
   error?: Event;
 };
 

@@ -20,9 +20,7 @@ import { ProfileTab } from "../profile/profile-tab";
 import { OrderHistoryTab } from "../profile/order-history-tab";
 import { IngredientModal } from "../burger-ingredients/ingredient-modal/ingredient-modal";
 import { OrdersFeedPage } from "../../pages/orders-feed-page";
-import { payload } from "./const"
 import { useDispatch } from "../../services/hooks";
-import { updateOrders } from "../../services/orders-feed/actions";
 import { WS_CONNECTION_START } from "../../services/middleware/actions";
 import { OrderModal } from "../orders-feed/feed-display/order-modal";
 import { OrdersPage } from "../../pages/orders-page";
@@ -36,7 +34,6 @@ function App() {
   useEffect(() => {
     dispatch(checkUserAuth());
     dispatch(loadIngredients());
-    dispatch({ type: WS_CONNECTION_START });
   }, []);
 
   return (

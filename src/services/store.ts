@@ -16,7 +16,9 @@ import { TUserActions } from "./user/actions";
 import { ThunkAction } from "redux-thunk";
 import { Action, ActionCreator } from "redux";
 import { reducer as ordersFeedReducer } from "./orders-feed/reducer";
+import { wsReducer as socketMiddlewareReducer } from "./middleware/reducer";
 import { socketMiddleware } from "./middleware/websocket-middleware";
+import { reducer as feedOrderReducer } from "./feed-order/reducer";
 import {
   WS_SEND_MESSAGE,
   WS_GET_MESSAGE,
@@ -27,6 +29,8 @@ import {
 } from "./middleware/actions";
 
 import { UPDATE_ORDERS } from "./orders-feed/actions";
+import { updateOrders } from "./orders-feed/actions";
+import { TFeedOrder } from "./feed-order/actions";
 
 export const rootReducer = combineReducers({
   burgerIngredients: ingredientsReducer,
@@ -37,6 +41,8 @@ export const rootReducer = combineReducers({
   loginReducer: loginReducer,
   user: userReducer,
   ordersFeed: ordersFeedReducer,
+  middleware: socketMiddlewareReducer,
+  feedOrder: feedOrderReducer,
 });
 
 export type RootState = ReturnType<typeof store.getState>;
@@ -47,13 +53,12 @@ export type TApplicationActions =
   | TOrderActions
   | TIngredientDetailsActions
   | TLoginActions
-  | TUserActions;
+  | TUserActions
+  | TFeedOrder;
 
 export type AppThunk<TReturn = void> = ActionCreator<
   ThunkAction<TReturn, Action, RootState, TApplicationActions>
 >;
-
-const wsUrl = "wss://norma.nomoreparties.space/orders/all";
 
 const wsActions = {
   wsInit: WS_CONNECTION_START,
@@ -61,13 +66,13 @@ const wsActions = {
   onOpen: WS_CONNECTION_SUCCESS,
   onClose: WS_CONNECTION_CLOSED,
   onError: WS_CONNECTION_ERROR,
-  onMessage: UPDATE_ORDERS,
+  onMessage: updateOrders,
 };
 
 export const store = createStore(
   rootReducer,
   composeWithDevToolsDevelopmentOnly(
-    applyMiddleware(thunk, socketMiddleware(wsUrl, wsActions))
+    applyMiddleware(thunk, socketMiddleware(wsActions, true))
   ) as any
 );
 
