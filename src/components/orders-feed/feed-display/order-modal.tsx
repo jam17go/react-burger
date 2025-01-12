@@ -2,7 +2,7 @@ import ModalWindow from "../../modal-window/modal-window";
 import { useDispatch } from "../../../services/hooks";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { Order } from "./order";
+import { Order } from "./order/order";
 import { useParams } from "react-router";
 
 export const OrderModal = (): JSX.Element => {

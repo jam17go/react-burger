@@ -17,7 +17,7 @@ export const getTotalTodayOrders = (state: RootState) => {
   return state.ordersFeed.totalTodayOrders;
 };
 
-export const getOrders = (state: RootState): IOrderCalculated[] => {
+export const getOrders = (state: RootState) => {
   return state.ordersFeed.orders;
 };
 

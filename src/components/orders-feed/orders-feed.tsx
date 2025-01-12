@@ -8,15 +8,12 @@ import { calculateOrders, flushState } from "../../services/orders-feed/actions"
 import { useSelector } from "../../services/hooks";
 import { Loader } from "../loader/loader";
 import { getAllIngredients, getLoadingStatus } from "../../services/burger-ingredients/selectors";
-import { calculationComplete } from "../../services/orders-feed/selectors";
 
 export function OrdersFeed(): JSX.Element {
   const dispatch = useDispatch();
   const allIngredients = useSelector(getAllIngredients);
   const ingredientsLoading = useSelector(getLoadingStatus);
   const ordersApiResponse = useSelector((store) => store.ordersFeed.ordersApiResponse);
-  const isReady = useSelector(calculationComplete);
-  const mode = useSelector((store) => store.ordersFeed.mode);
   const connectedUrl = useSelector((store) => store.ordersFeed.url);
 
   useEffect(() => {
