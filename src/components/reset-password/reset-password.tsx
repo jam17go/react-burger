@@ -7,7 +7,7 @@ import { useDispatch } from "../../services/hooks";
 import { passwordResetReset } from "../../services/password-reset/actions";
 import { Navigate, useNavigate } from "react-router-dom";
 import { NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector } from "../../services/hooks";
 import { FormEvent, useState } from "react";
 
 export function ResetPassword(): JSX.Element {

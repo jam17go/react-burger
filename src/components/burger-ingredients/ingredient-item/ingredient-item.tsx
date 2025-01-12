@@ -3,8 +3,7 @@ import {
   CurrencyIcon,
   Counter,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { ingredientItemPropType } from "../../../types/prop-types";
-import { useSelector } from "react-redux";
+import { useSelector } from "../../../services/hooks";
 import { getItemCount } from "../../../services/burger-constructor/selectors";
 import { useDrag } from "react-dnd";
 import { NavLink } from "react-router-dom";

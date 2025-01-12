@@ -1,6 +1,6 @@
 import styles from "./app-main.module.css";
 import PropTypes from "prop-types";
-import { useSelector } from "react-redux";
+import { useSelector } from '../../services/hooks';
 import {
   getLoadingStatus,
   getErrorStatus,
