@@ -3,7 +3,7 @@ import {
   Button,
   Input,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "../../services/hooks";
 import { useEffect, useState } from "react";
 import { updateUser } from "../../services/profile/actions";
 

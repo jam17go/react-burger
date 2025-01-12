@@ -4,7 +4,7 @@ import {
   Input,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./registration.module.css";
-import { useDispatch } from "react-redux";
+import { useDispatch } from "../../services/hooks";
 import { register } from "../../services/registration/actions";
 import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";

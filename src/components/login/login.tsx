@@ -3,7 +3,7 @@ import {
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./login.module.css";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "../../services/hooks";
 import { login } from "../../services/user/actions";
 import { NavLink } from "react-router-dom";
 import React from "react";
