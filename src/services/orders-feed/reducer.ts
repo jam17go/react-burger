@@ -1,5 +1,4 @@
 import { TOrdersFeedActions } from "./actions";
-import { getIngredientGroupsData } from "../burger-ingredients/selectors";
 import { IOrderCalculated } from "./actions";
 
 export type TOrderFeedState = {
@@ -29,16 +28,6 @@ export type TOrder = {
   createdAt: string;
   ingredients: string[];
 }
-
-// export type TOrderCalculated = {
-//   _id: string;
-//   number: number;
-//   name: string;
-//   status: string;
-//   createdAt: string;
-//   ingredients: TIngredient[];
-//   price: number;
-// }
 
 const initialState = {
   readyOrders: [],
@@ -83,11 +72,6 @@ export const reducer = (state = initialState, action: TOrdersFeedActions): TOrde
     case "FLUSH_STATE":
       return {
         ...initialState,
-      };
-    case "SET_MODE":
-      return {
-        ...state,
-        mode: action.payload,
       };
     default:
       return state;

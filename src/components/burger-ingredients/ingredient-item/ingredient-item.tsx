@@ -9,6 +9,7 @@ import { getItemCount } from "../../../services/burger-constructor/selectors";
 import { useDrag } from "react-dnd";
 import { NavLink } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+import { RootState } from "../../../services/store";
 
 type ingredientItemProp = {
   _id: string;
@@ -22,7 +23,7 @@ type TIngredientItemProp = {
 };
 
 const IngredientItem = ({ item }: TIngredientItemProp): JSX.Element => {
-  const itemCount = useSelector((state) => getItemCount(state, item));
+  const itemCount = useSelector((state: RootState) => getItemCount(state, item));
   const location = useLocation();
 
   const [, dragRef] = useDrag({

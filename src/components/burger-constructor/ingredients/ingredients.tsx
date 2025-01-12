@@ -1,6 +1,6 @@
 import styles from "./ingredients.module.css";
 import { useSelector } from "react-redux";
-import { getSelectedIngredients } from "../../../services/burger-constructor/selectors.js";
+import { getSelectedIngredients } from "../../../services/burger-constructor/selectors";
 import { DraggableIngredient } from "../draggable-ingredient/draggable-ingredient";
 
 export const Ingredients = (): JSX.Element => {

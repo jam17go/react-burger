@@ -9,7 +9,7 @@ import OrderDetails from "../../order-details/order-details";
 import { useSelector } from "react-redux";
 import { useDispatch } from "../../../services/hooks";
 import { getTotalPrice } from "../../../services/burger-constructor/selectors";
-import { getSelectedIngredients } from "../../../services/burger-constructor/selectors.js";
+import { getSelectedIngredients } from "../../../services/burger-constructor/selectors";
 import { placeOrder } from "../../../services/order/actions";
 import { cleanupConstructorState } from "../../../services/burger-constructor/actions";
 import { resetOrder } from "../../../services/order/actions";

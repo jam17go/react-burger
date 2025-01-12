@@ -1,14 +1,13 @@
 import { useParams } from "react-router";
 import { useSelector } from "../../../services/hooks";
-import { getOrders } from "../../../services/orders-feed/selectors";
 import { getHumanReadableDate } from "../../../utils/date-utils";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useEffect } from "react";
 import { loadOrder } from "../../../services/feed-order/actions";
 import { useDispatch } from "../../../services/hooks";
 import { getAllIngredients, getLoadingStatus } from "../../../services/burger-ingredients/selectors";
-import { useMemo } from "react";
 import styles from "./feed-display.module.css";
+import { Loader } from "../../loader/loader";
 
 export function Order(): JSX.Element {
   const { id } = useParams();
@@ -26,15 +25,12 @@ export function Order(): JSX.Element {
   const isLoading = useSelector((store) => store.feedOrder.loading);
   const hasError = useSelector((store) => store.feedOrder.error);
 
-  //const orders = useSelector(getOrders);
-  //const order = orders.find((order) => order.number === id);
-
   if (hasError) {
     return <>Error</>;
   }
 
   if (isLoading || ingredientsLoading) {
-    return <>Загрузка...</>;
+    return <Loader />
   }
 
   if (!order) {

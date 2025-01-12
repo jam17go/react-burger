@@ -4,11 +4,9 @@ import styles from "./orders-feed.module.css";
 import { useEffect } from "react";
 import { WS_CONNECTION_START } from "../../services/middleware/actions";
 import { useDispatch } from "../../services/hooks";
-import { WS_CONNECTION_CLOSED } from "../../services/middleware/actions";
-import { calculateOrders, setOrders, flushState, setMode } from "../../services/orders-feed/actions";
+import { calculateOrders, flushState } from "../../services/orders-feed/actions";
 import { useSelector } from "../../services/hooks";
 import { Loader } from "../loader/loader";
-import { updateOrdersPending } from "../../services/orders-feed/actions";
 import { getAllIngredients, getLoadingStatus } from "../../services/burger-ingredients/selectors";
 import { calculationComplete } from "../../services/orders-feed/selectors";
 
@@ -22,17 +20,12 @@ export function OrdersFeed(): JSX.Element {
   const connectedUrl = useSelector((store) => store.ordersFeed.url);
 
   useEffect(() => {
-    // dispatch(updateOrdersPending());
-    // dispatch(setOrders({ orders: [], total: 0, totalToday: 0, readyOrders: [], inProgressOrders: [] }));
     dispatch({
       type: WS_CONNECTION_START,
       payload: "wss://norma.nomoreparties.space/orders/all",
     });
 
     return () => {
-      // dispatch(updateOrdersPending());
-      // dispatch(setOrders({ orders: [], total: 0, totalToday: 0, readyOrders: [], inProgressOrders: [] }));
-      // dispatch(updateOrdersPending());
       dispatch(flushState());
     };
   }, []);
@@ -41,7 +34,7 @@ export function OrdersFeed(): JSX.Element {
     if (!ordersApiResponse) {
       return;
     }
-    dispatch(calculateOrders(allIngredients, ordersApiResponse, "feed"));
+    dispatch(calculateOrders(allIngredients, ordersApiResponse));
   }, [ingredientsLoading, ordersApiResponse, connectedUrl]);
 
   if ( connectedUrl !== "wss://norma.nomoreparties.space/orders/all" ) {

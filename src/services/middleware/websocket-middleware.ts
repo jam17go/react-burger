@@ -68,11 +68,11 @@ export const socketMiddleware = (
           }
 
           const parsedUrl = new URL(url);
-          const protocol = parsedUrl.protocol; // "https:"
-          const host = parsedUrl.host;         // "example.com:8080" (includes port if present)
-          const path = parsedUrl.pathname;     // "/path/to/resource"
+          const protocol = parsedUrl.protocol;
+          const host = parsedUrl.host;
+          const path = parsedUrl.pathname;
 
-          dispatch({ type: 'UPDATE_ORDERS', payload: {...parsedData, url: `${protocol}//${host}${path}`} });
+          dispatch({ type: onMessage, payload: {...parsedData, url: `${protocol}//${host}${path}`} });
         };
 
         socket.onclose = (event) => {

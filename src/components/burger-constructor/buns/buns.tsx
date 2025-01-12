@@ -1,7 +1,7 @@
 import styles from "./buns.module.css";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useSelector } from "react-redux";
-import { getSelectedBun } from "../../../services/burger-constructor/selectors.js";
+import { getSelectedBun } from "../../../services/burger-constructor/selectors";
 
 type TBunsProps = {
   children: React.ReactNode;

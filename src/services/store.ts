@@ -29,7 +29,6 @@ import {
 } from "./middleware/actions";
 
 import { UPDATE_ORDERS } from "./orders-feed/actions";
-import { updateOrders } from "./orders-feed/actions";
 import { TFeedOrder } from "./feed-order/actions";
 
 export const rootReducer = combineReducers({
@@ -66,7 +65,7 @@ const wsActions = {
   onOpen: WS_CONNECTION_SUCCESS,
   onClose: WS_CONNECTION_CLOSED,
   onError: WS_CONNECTION_ERROR,
-  onMessage: updateOrders,
+  onMessage: UPDATE_ORDERS,
 };
 
 export const store = createStore(

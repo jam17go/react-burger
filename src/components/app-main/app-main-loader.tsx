@@ -4,7 +4,8 @@ import { useSelector } from "react-redux";
 import {
   getLoadingStatus,
   getErrorStatus,
-} from "../../services/burger-ingredients/selectors.js";
+} from "../../services/burger-ingredients/selectors";
+import { Loader } from "../loader/loader";
 
 type TAppMainLoaderProps = {
   children: React.ReactNode;
@@ -15,7 +16,7 @@ function AppMainLoader({ children }: TAppMainLoaderProps): JSX.Element {
   const error = useSelector(getErrorStatus);
 
   if (loading) {
-    return <div className={styles.loading}>Загрузка...</div>;
+    return <Loader />;
   }
 
   if (error) {

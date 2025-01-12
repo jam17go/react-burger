@@ -1,12 +1,15 @@
-export const getSelectedIngredients = (state) => {
+import { TIngredient } from "../orders-feed/reducer";
+import { RootState } from "../store";
+
+export const getSelectedIngredients = (state: RootState) => {
   return state.burgerConstructor.ingredients;
 };
 
-export const getSelectedBun = (state) => {
+export const getSelectedBun = (state: RootState) => {
   return state.burgerConstructor.bun;
 };
 
-export const getItemCount = (state, item) => {
+export const getItemCount = (state: RootState, item: TIngredient) => {
   const searchList = [
     ...state.burgerConstructor.ingredients,
     ...(state.burgerConstructor.bun ? [state.burgerConstructor.bun] : []),
@@ -15,7 +18,7 @@ export const getItemCount = (state, item) => {
   return searchList.filter((ingredient) => ingredient._id === item._id).length;
 };
 
-export const getTotalPrice = (state) => {
+export const getTotalPrice = (state: RootState) => {
   const ingredients = state.burgerConstructor.ingredients;
   const bun = state.burgerConstructor.bun;
   const ingredientsPrice = ingredients.reduce(
@@ -27,7 +30,7 @@ export const getTotalPrice = (state) => {
   return ingredientsPrice + bunPrice;
 };
 
-export const getOrderIngredientsList = (state) => {
+export const getOrderIngredientsList = (state: RootState) => {
   const ingredients = [
     ...(state.burgerConstructor.bun ? [state.burgerConstructor.bun] : []),
     ...state.burgerConstructor.ingredients,

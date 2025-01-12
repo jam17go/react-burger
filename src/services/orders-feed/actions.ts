@@ -1,5 +1,3 @@
-import { getBurgerIngredients } from "../../utils/stellar-burger-api";
-import { getAllIngredients } from "../burger-ingredients/selectors";
 import { AppDispatch } from "../hooks";
 
 export const UPDATE_ORDERS: "UPDATE_ORDERS" = "UPDATE_ORDERS";
@@ -75,11 +73,6 @@ export interface IFlushStateAction {
   readonly type: typeof FLUSH_STATE;
 }
 
-export interface ISetModeAction {
-  readonly type: typeof SET_MODE;
-  readonly payload: string;
-}
-
 export const flushState = () => ({
   type: FLUSH_STATE,
 });
@@ -92,7 +85,7 @@ export const updateOrdersSuccess = () => ({
   type: UPDATE_ORDERS_SUCCESS,
 });
 
-export const calculateOrders = (allIngredients: any, ordersApiResponse: any, mode: string) => (dispatch: AppDispatch) => {
+export const calculateOrders = (allIngredients: any, ordersApiResponse: any) => (dispatch: AppDispatch) => {
   dispatch(updateOrdersPending());
 
   const readyOrders = ordersApiResponse.orders
@@ -112,9 +105,9 @@ export const calculateOrders = (allIngredients: any, ordersApiResponse: any, mod
       if (!ingredient) {
         return {
           _id: "",
-          name: "NAME",
+          name: "",
           image: "",
-          price: 10,
+          price: 0,
         };
       }
 
@@ -142,12 +135,6 @@ export const calculateOrders = (allIngredients: any, ordersApiResponse: any, mod
       totalToday: ordersApiResponse.totalToday,
     })
   );
-
-  // dispatch(
-  //   updateOrdersSuccess()
-  // );
-
-  dispatch(setMode(mode));
 }
 
 export const setOrders = (orders: IOrdersParsed) => ({
@@ -160,72 +147,6 @@ export const setMode = (mode: string) => ({
   payload: mode,
 });
 
-// export const updateOrders =
-//   (ordersResponse: IOrdersResponse) => (dispatch: AppDispatch) => {
-//     //dispatch(updateOrdersPending());
-
-//     // const readyOrders = ordersResponse.orders
-//     //   .filter((order) => order.status === "done")
-//     //   .map((order) => order.number);
-
-//     // const inProgressOrders = ordersResponse.orders
-//     //   .filter((order) => order.status === "pending")
-//     //   .map((order) => order.number);
-
-//     // const ingredients = getAllIngredients(state);
-
-//     // const orders = ordersResponse.orders.map((order) => {
-//     //   const ingredientsCalculated = order.ingredients.map((ingredientId) => {
-//     //     const ingredient = ingredients.find(
-//     //       (item: Ingredient) => item._id === ingredientId
-//     //     );
-
-//     //     if (!ingredient) {
-//     //       return {
-//     //         _id: "",
-//     //         name: "NAME",
-//     //         image: "",
-//     //         price:  10,
-//     //       };
-//     //     }
-
-//     //     return {
-//     //       _id: ingredient._id,
-//     //       name: ingredient.name,
-//     //       image: ingredient.image_mobile,
-//     //       price: ingredient.price,
-//     //     };
-//     //   });
-
-//     //   return {
-//     //     ...order,
-//     //     ingredients: ingredientsCalculated,
-//     //     price: ingredientsCalculated.reduce((acc, item) => acc + item.price, 0),
-//     //   };
-//     // });
-
-//     // dispatch(
-//     //   setOrders({
-//     //     readyOrders,
-//     //     inProgressOrders,
-//     //     orders,
-//     //     total: ordersResponse.total,
-//     //     totalToday: ordersResponse.totalToday,
-//     //   })
-//     // );
-
-//     dispatch(updateOrdersSuccess());
-//   };
-
-// export const updateOrders = (
-//   ordersResponse: IOrdersResponse
-// ): IUpdateOrdersAction => () => {
-//   return {
-//     type: UPDATE_ORDERS,
-//     payload: ordersResponse,
-//   };
-// };
-
 export const updateOrders = {type: UPDATE_ORDERS};
 
 export type TOrdersFeedActions =
@@ -233,5 +154,4 @@ export type TOrdersFeedActions =
   | IUpdateOrdersPendingAction
   | IUpdateOrdersSuccessAction
   | ISetOrdersAction
-  | IFlushStateAction
-  | ISetModeAction;
+  | IFlushStateAction;
