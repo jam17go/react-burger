@@ -6,9 +6,10 @@ import {
 import { useState } from "react";
 import ModalWindow from "../../modal-window/modal-window";
 import OrderDetails from "../../order-details/order-details";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "../../../services/hooks";
+import { useDispatch } from "../../../services/hooks";
 import { getTotalPrice } from "../../../services/burger-constructor/selectors";
-import { getSelectedIngredients } from "../../../services/burger-constructor/selectors.js";
+import { getSelectedIngredients } from "../../../services/burger-constructor/selectors";
 import { placeOrder } from "../../../services/order/actions";
 import { cleanupConstructorState } from "../../../services/burger-constructor/actions";
 import { resetOrder } from "../../../services/order/actions";

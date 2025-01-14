@@ -3,7 +3,7 @@ import {
   Input,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./forgot-password.module.css";
-import { useDispatch } from "react-redux";
+import { useDispatch } from '../../services/hooks';
 import { passwordReset } from "../../services/password-reset/actions";
 import { useNavigate } from "react-router-dom";
 import { NavLink } from "react-router-dom";

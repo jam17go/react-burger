@@ -1,6 +1,6 @@
 import ModalWindow from "../../modal-window/modal-window";
 import { setCurrentIngredient } from "../../../services/ingredient-details/actions";
-import { useDispatch } from "react-redux";
+import { useDispatch } from "../../../services/hooks";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { Ingredient } from "../../ingredient/ingredient";

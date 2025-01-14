@@ -1,5 +1,5 @@
 import { useParams } from "react-router";
-import { useSelector } from "react-redux";
+import { useSelector } from "../../services/hooks";
 import { getIngredientGroupsData } from "../../services/burger-ingredients/selectors";
 import IngredientDetails from "../ingredient-details/ingredient-details";
 import styles from "./ingredient.module.css";

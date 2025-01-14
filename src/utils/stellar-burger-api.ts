@@ -1,4 +1,5 @@
 import { ENDPOINTS } from "../config/api";
+import { IIngredient } from "../services/burger-constructor/actions";
 
 type TIngredient = {
   _id: string;
@@ -76,6 +77,20 @@ type TResponseUpdateUserInfo = {
   };
 };
 
+type TOrder = {
+  _id: string;
+  number: string;
+  name: string;
+  status: string;
+  createdAt: string;
+  ingredients: string[];
+};
+
+type TResponseGetOrder = {
+  success: boolean;
+  orders: TOrder[];
+};
+
 export async function getResponse<T>(res: Response): Promise<T> {
   if (res.ok) {
     return res.json();
@@ -135,7 +150,7 @@ export const fetchWithRefresh = async <T>(
 };
 
 export const postOrder = (
-  ingredients: string[]
+  ingredients: IIngredient[]
 ): Promise<TResponsePostOrder> => {
   const accessToken = localStorage.getItem("accessToken") || "";
 
@@ -148,6 +163,14 @@ export const postOrder = (
     body: JSON.stringify({
       ingredients: ingredients,
     }),
+  });
+};
+
+export const getOrder = (
+  orderId: string,
+): Promise<TResponseGetOrder> => {
+  return fetchWithRefresh<TResponseGetOrder>(ENDPOINTS.ORDERS + '/' + orderId, {
+    method: "GET",
   });
 };
 

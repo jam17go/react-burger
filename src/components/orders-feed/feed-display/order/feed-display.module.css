@@ -1,0 +1,74 @@
+/* Center the container */
+.singleOrderContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Style the contents */
+.singleOrderContents {
+  max-width: 700px;
+  min-width: 700px;
+}
+
+.number {
+  composes: mb-6 text text_type_digits-default from global;
+}
+
+.orderName {
+  composes: mb-6 from global;
+  composes: text text_type_main-medium from global;
+}
+
+/* Order Status */
+.orderStatus {
+  font-size: 16px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Ingredients */
+.orderIngredients {
+  margin-bottom: 20px;
+}
+
+.ingredientDetails {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.ingredientDetails img {
+  width: 100px; /* Fixed width for images */
+  height: 60px; /* Fixed height for images */
+}
+
+.ingredientName {
+  composes: text text_type_main-small from global;
+}
+
+.ingredientPrice {
+  composes: text text_type_digits-default from global;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  margin-left: auto;
+}
+/* Footer */
+.orderFooter {
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid #333;
+  padding-top: 10px;
+}
+
+.date {
+  composes: text text_type_main-default text_color_inactive from global;
+}
+
+.price {
+  composes: text text_type_digits-default from global;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}

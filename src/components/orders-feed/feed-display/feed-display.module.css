@@ -1,0 +1,145 @@
+.section {
+  display: inline-block;
+  max-width: 600px;
+  min-width: 600px;
+  width: 100%;
+  height: 100%;
+  vertical-align: top;
+  text-align: left;
+}
+
+.tabs {
+  display: flex;
+  padding: 0;
+  margin: 0;
+}
+
+.groups {
+  max-height: 90vh;
+  overflow-y: auto;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.orderIngredients {
+  max-height: 35vh;
+  overflow-y: auto;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.orderName {
+  composes: mb-6 from global;
+  composes: text text_type_main-medium from global;
+}
+
+.number {
+  composes: text text_type_digits-default from global;
+}
+
+.price {
+  composes: text text_type_digits-default from global;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+}
+
+.date {
+  composes: text text_type_main-default text_color_inactive from global;
+}
+
+.cardHeader {
+  composes: mb-6 from global;
+  display: flex;
+  justify-content: space-between;
+  align-items: center; 
+}
+
+.cardContent {
+  composes: pt-6 pl-6 pr-6 pb-6 mb-4 mr-4 from global;
+  background: #1c1c21;
+  border-radius: 24px;
+}
+
+/* Container to align images in a row */
+.imageContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row-reverse; /* Reverse the direction */
+}
+
+/* Wrapper to create circular shapes with overlap */
+.imageWrapper {
+  width: 60px; /* Adjust size as needed */
+  height: 60px; /* Adjust size as needed */
+  border-radius: 50%; /* Makes the element circular */
+  border: 1px solid #6a44ff; /* Optional: purple border */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #2d2d2d; /* Background behind the image */
+  overflow: hidden; /* Ensures the image fits within the circle */
+  margin-left: -10px; /* Creates overlap effect */
+  position: relative; /* Ensures proper stacking */
+  z-index: 1; /* Prevents unwanted layering issues */
+}
+
+/* Style for the images */
+.imageWrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensures the image scales correctly */
+}
+
+.orderContents {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  composes: mb-2 from global;
+}
+
+.orderItem {
+  cursor: pointer;
+  text-decoration: none; /* Ensures no underline */
+  color: inherit; /* Inherits color from parent or global styles */
+}
+
+.orderItem:visited,
+.orderItem:active,
+.orderItem:hover {
+  text-decoration: none; /* Prevents underline on visited or hover state */
+  color: inherit; /* Keeps text color consistent */
+}
+
+.ingredientDetails {
+  display: flex;
+  /* justify-content: space-between; */
+  align-items: center;
+  composes: mb-2 mr-6 from global;
+}
+
+.ingredientName {
+  composes: text text_type_main-small from global;
+}
+
+.ingredientPrice {
+  composes: text text_type_digits-default from global;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  margin-left: auto;
+}
+
+.orderFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  composes: mt-6 from global;
+}
+
+.orderContainer {
+  composes: mr-6 ml-6 from global;
+}
