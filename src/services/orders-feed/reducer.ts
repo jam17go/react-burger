@@ -29,15 +29,14 @@ export type TOrder = {
   ingredients: string[];
 }
 
-const initialState = {
+export const initialState = {
   readyOrders: [],
   inProgressOrders: [],
   totalOrders: null,
   totalTodayOrders: null,
-  ordersApiResponse: null, 
   orders: [],
   updateComplete: false,
-  calculationComplete: false,
+  ordersApiResponse: null,
   mode: "",
   url: "",
 };

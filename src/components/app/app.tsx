@@ -42,6 +42,7 @@ function App() {
       <DndProvider backend={HTML5Backend}>
         <Routes location={state?.backgroundLocation || location}>
           <Route path="/" element={<HomePage />} />
+          <Route path="/react-burger/" element={<HomePage />} />
           <Route
             path="/login"
             element={<OnlyUnAuth component={<LoginPage />} />}
