@@ -1,4 +1,4 @@
-import { wsReducer } from './reducer';
+import { wsReducer, initialState } from './reducer';
 import {
   WS_CONNECTION_SUCCESS,
   WS_CONNECTION_ERROR,
@@ -6,10 +6,6 @@ import {
 } from './actions';
 
 describe('wsReducer', () => {
-  const initialState = {
-    wsConnected: false,
-  };
-
   it('returns the initial state when an unknown action is dispatched', () => {
     const action = { type: 'UNKNOWN_ACTION' };
     const state = wsReducer(undefined, action);

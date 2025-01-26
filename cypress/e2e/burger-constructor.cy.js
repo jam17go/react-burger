@@ -1,45 +1,39 @@
-describe("ingredient modal works correctly", () => {
+import { SELECTORS } from "../support/selectors";
+
+describe("Ingredient modal works correctly", () => {
   beforeEach(() => {
-    cy.visit("http://localhost:3000/react-burger");
+    cy.visit("/");
   });
 
-  it("show ingredient detail", () => {
+  it("should show ingredient detail", () => {
     cy.contains("Конструктор");
     cy.contains("Соберите бургер");
 
-    cy.get("[data-testid=ingredient-item]").first().click();
-    cy.get("[data-testid=modal-window]").contains("Детали ингредиента");
+    cy.openIngredientModal();
+    cy.get(SELECTORS.modalWindow).contains("Детали ингредиента");
   });
 
-  it("show should close modal on button click", () => {
-    cy.get("[data-testid=ingredient-item]").first().click();
-    cy.get("[data-testid=modal-window-close]").click();
-    cy.get("[data-testid=modal-window]").should("not.exist");
+  it("should close modal on button click", () => {
+    cy.openIngredientModal();
+    cy.get(SELECTORS.modalWindowClose).click();
+    cy.get(SELECTORS.modalWindow).should("not.exist");
   });
 });
 
-describe("drag ingredients to constructor works correctly", () => {
+describe("Drag ingredients to constructor works correctly", () => {
   beforeEach(() => {
-    cy.visit("http://localhost:3000/react-burger");
+    cy.visit("/");
   });
 
   it("should allow bun to be dragged and dropped to the constructor", () => {
-    const ingredientSelector = "[data-testid=ingredient-item]";
-    const dropTargetSelector = "[data-testid=drop-container]";
-
-    cy.get(ingredientSelector).should("be.visible");
-    cy.get(ingredientSelector).contains("Краторная булка N-200i").trigger("dragstart");
-    cy.get(dropTargetSelector).trigger("drop").trigger("dragend");
-    cy.get(dropTargetSelector).contains("Краторная булка N-200i");
+    cy.get(SELECTORS.ingredientItem).should("be.visible");
+    cy.dragAndDrop("Краторная булка N-200i", SELECTORS.dropContainer);
+    cy.get(SELECTORS.dropContainer).contains("Краторная булка N-200i");
   });
 
   it("should allow ingredient to be dragged and dropped to the constructor", () => {
-    const ingredientSelector = "[data-testid=ingredient-item]";
-    const dropTargetSelector = "[data-testid=drop-container]";
-
-    cy.get(ingredientSelector).should("be.visible");
-    cy.get(ingredientSelector).contains("Соус Spicy-X").trigger("dragstart");
-    cy.get(dropTargetSelector).trigger("drop").trigger("dragend");
-    cy.get(dropTargetSelector).contains("Соус Spicy-X");
+    cy.get(SELECTORS.ingredientItem).should("be.visible");
+    cy.dragAndDrop("Соус Spicy-X", SELECTORS.dropContainer);
+    cy.get(SELECTORS.dropContainer).contains("Соус Spicy-X");
   });
 });

@@ -15,5 +15,5 @@ npm test
 
 ## Run cypress e2e tests
 ```
-npx cypress open
+npm run cypress
 ```

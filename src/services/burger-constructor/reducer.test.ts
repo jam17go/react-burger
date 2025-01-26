@@ -1,4 +1,4 @@
-import { reducer, TBurgerConstructorState } from "./reducer";
+import { reducer, initialState } from "./reducer";
 import {
   ADD_INGREDIENT,
   REMOVE_INGREDIENT,
@@ -7,7 +7,13 @@ import {
   TBurgerConstructorActions,
 } from "./actions";
 
-import { IIngredient } from "./actions";
+const testIngredient = {
+  listId: "1",
+  name: "bun",
+  price: 100,
+  image: "image",
+  type: "main",
+}
 
 describe("burger-constructor reducer", () => {
   it("should return the initial state", () => {
@@ -21,31 +27,15 @@ describe("burger-constructor reducer", () => {
   it("should handle ADD_INGREDIENT", () => {
     expect(
       reducer(
-        {
-          ingredients: [],
-          bun: null,
-          activeIngredientGroup: "Булки",
-        },
+        initialState,
         {
           type: ADD_INGREDIENT,
-          payload: {
-            listId: "1",
-            name: "bun",
-            price: 100,
-            image: "image",
-            type: "main",
-          },
+          payload: testIngredient,
         }
       )
     ).toEqual({
       ingredients: [
-        {
-          listId: "1",
-          name: "bun",
-          price: 100,
-          image: "image",
-          type: "main",
-        },
+        testIngredient
       ],
       bun: null,
       activeIngredientGroup: "Булки",
@@ -57,26 +47,14 @@ describe("burger-constructor reducer", () => {
       reducer(
         {
           ingredients: [
-            {
-              listId: "1",
-              name: "bun",
-              price: 100,
-              image: "image",
-              type: "main",
-            },
+            testIngredient,
           ],
           bun: null,
           activeIngredientGroup: "Булки",
         },
         {
           type: REMOVE_INGREDIENT,
-          payload: {
-            listId: "1",
-            name: "bun",
-            price: 100,
-            image: "image",
-            type: "main",
-          },
+          payload: testIngredient,
         }
       )
     ).toEqual({
@@ -91,20 +69,8 @@ describe("burger-constructor reducer", () => {
       reducer(
         {
           ingredients: [
-            {
-              listId: "1",
-              name: "bun",
-              price: 100,
-              image: "image",
-              type: "main",
-            },
-            {
-              listId: "2",
-              name: "bun",
-              price: 100,
-              image: "image",
-              type: "main",
-            },
+            {...testIngredient, listId: "1"},
+            {...testIngredient, listId: "2"},
           ],
           bun: null,
           activeIngredientGroup: "Булки",
@@ -116,20 +82,8 @@ describe("burger-constructor reducer", () => {
       )
     ).toEqual({
       ingredients: [
-        {
-          listId: "2",
-          name: "bun",
-          price: 100,
-          image: "image",
-          type: "main",
-        },
-        {
-          listId: "1",
-          name: "bun",
-          price: 100,
-          image: "image",
-          type: "main",
-        },
+        {...testIngredient, listId: "2"},
+        {...testIngredient, listId: "1"},
       ],
       bun: null,
       activeIngredientGroup: "Булки",
@@ -141,13 +95,7 @@ describe("burger-constructor reducer", () => {
       reducer(
         {
           ingredients: [
-            {
-              listId: "1",
-              name: "bun",
-              price: 100,
-              image: "image",
-              type: "main",
-            },
+            testIngredient,
           ],
           bun: null,
           activeIngredientGroup: "Булки",
