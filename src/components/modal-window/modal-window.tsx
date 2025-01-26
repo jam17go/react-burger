@@ -37,9 +37,9 @@ const ModalWindow = ({
 
   return ReactDOM.createPortal(
     <div className={styles.modalOverlay} onClick={onClose}>
-      <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
+      <div data-testid="modal-window" className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
         <div className={styles.modalHeader}>
-          <div onClick={onClose} className={styles.closeButton}>
+          <div data-testid="modal-window-close" onClick={onClose} className={styles.closeButton}>
             <CloseIcon type="primary" />
           </div>
         </div>

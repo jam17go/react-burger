@@ -18,7 +18,7 @@ const BurgerConstructor = (): JSX.Element => {
   });
 
   return (
-    <div ref={dropRef} className={styles.section}>
+    <div data-testid='drop-container' ref={dropRef} className={styles.section}>
       <div className={styles.listContainer}>
         <Buns>
           <Ingredients />
