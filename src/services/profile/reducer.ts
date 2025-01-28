@@ -11,7 +11,7 @@ type TProfileState = {
   error: null | any,
 };
 
-const initialState = {
+export const initialState = {
   user: {},
   loading: false,
   error: null,

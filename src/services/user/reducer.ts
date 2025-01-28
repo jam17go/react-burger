@@ -7,7 +7,7 @@ type TUserState = {
   loginError: null | any
 };
 
-const initialState = {
+export const initialState = {
     user: null,
     isAuthChecked: false,
     loginError: null

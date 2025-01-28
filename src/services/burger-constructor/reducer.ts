@@ -8,19 +8,19 @@ import {
 import { TBurgerConstructorActions } from "./actions";
 import { IIngredient } from "./actions";
 
-type TBurgerConstructorState = {
+export type TBurgerConstructorState = {
   ingredients: Array<IIngredient>;
   bun: any;
   activeIngredientGroup: string;
 };
 
-const initialState = {
+export const initialState = {
   ingredients: [],
   bun: null,
   activeIngredientGroup: "Булки",
 };
 
-export const reducer = (state = initialState, action: TBurgerConstructorActions): TBurgerConstructorState => {
+export const reducer = (state: TBurgerConstructorState = initialState, action: TBurgerConstructorActions): TBurgerConstructorState => {
   switch (action.type) {
     case ADD_INGREDIENT:
       if (action.payload.type === "bun") {

@@ -33,6 +33,7 @@ const IngredientItem = ({ item }: TIngredientItemProp): JSX.Element => {
   return (
     <div ref={dragRef}>
       <NavLink
+        data-testid='ingredient-item'
         to={`/ingredients/${item._id}`}
         state={{ backgroundLocation: location }}
         className={styles.ingredientItem}
