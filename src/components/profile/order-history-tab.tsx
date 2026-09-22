@@ -17,7 +17,7 @@ export function OrderHistoryTab(): JSX.Element {
   const connectedUrl = useSelector((store) => store.ordersFeed.url);
 
   useEffect(() => {
-    dispatch({ type: WS_CONNECTION_START, payload: "wss://norma.nomoreparties.space/orders" });
+    dispatch({ type: WS_CONNECTION_START, payload: "wss://norma.education-services.ru/orders" });
 
     return () => {
       dispatch(flushState());
@@ -31,7 +31,7 @@ export function OrderHistoryTab(): JSX.Element {
     dispatch(calculateOrders(allIngredients, ordersApiResponse));
   }, [ingredientsLoading, ordersApiResponse, connectedUrl]);
 
-  if ( connectedUrl !== "wss://norma.nomoreparties.space/orders" ) {
+  if ( connectedUrl !== "wss://norma.education-services.ru/orders" ) {
     return (
       <Loader />
     );

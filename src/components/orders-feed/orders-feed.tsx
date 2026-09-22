@@ -19,7 +19,7 @@ export function OrdersFeed(): JSX.Element {
   useEffect(() => {
     dispatch({
       type: WS_CONNECTION_START,
-      payload: "wss://norma.nomoreparties.space/orders/all",
+      payload: "wss://norma.education-services.ru/orders/all",
     });
 
     return () => {
@@ -34,7 +34,7 @@ export function OrdersFeed(): JSX.Element {
     dispatch(calculateOrders(allIngredients, ordersApiResponse));
   }, [ingredientsLoading, ordersApiResponse, connectedUrl]);
 
-  if ( connectedUrl !== "wss://norma.nomoreparties.space/orders/all" ) {
+  if ( connectedUrl !== "wss://norma.education-services.ru/orders/all" ) {
     return (
       <Loader />
     );

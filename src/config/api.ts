@@ -1,4 +1,4 @@
-const BASE_API_URL = process.env.REACT_APP_BASE_API_URL || "https://norma.nomoreparties.space/api";
+const BASE_API_URL = process.env.REACT_APP_BASE_API_URL || "https://norma.education-services.ru/api";
 
 export const ENDPOINTS = {
   INGREDIENTS: `${BASE_API_URL}/ingredients`,
